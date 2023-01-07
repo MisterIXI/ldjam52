@@ -12,5 +12,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         RefManager.gameManager = this;
+        DontDestroyOnLoad(this);
     }
 }
