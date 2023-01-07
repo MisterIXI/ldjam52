@@ -9,6 +9,10 @@ public class DoorInteraction : MonoBehaviour, IInteractable
     bool isOpening;
     private float _timeElapsed;
     private float _startAngle;
+    [SerializeField] Material closedMat;
+    [SerializeField] Material openedMat;
+    [SerializeField] Vector3 startVec;
+    bool once;
     private void Start()
     {
         _timeElapsed = 0;
@@ -16,8 +20,13 @@ public class DoorInteraction : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
-        if(!isOpening)
-            isOpening = true;
+        GetComponent<MeshRenderer>().material = openedMat;
+        if (!once)
+        {
+            once = true;
+            if(!isOpening)
+                isOpening = true;
+        }
     }
     
     void Update()
@@ -25,13 +34,13 @@ public class DoorInteraction : MonoBehaviour, IInteractable
         if (isOpening)
         {
             _timeElapsed += Time.deltaTime;
-            float currentAngle= Mathf.Lerp(_startAngle, _startAngle+openingAngle, _timeElapsed / openingTime);
-            transform.parent.localRotation = Quaternion.Euler(currentAngle, 0, 0);
+            float currentAngle= Mathf.Lerp(_startAngle, openingAngle, _timeElapsed / openingTime);
+            transform.parent.localRotation = Quaternion.Euler(currentAngle, startVec.y, startVec.z);
      
             if(_timeElapsed >= openingTime)
             {
-                transform.parent.localRotation = Quaternion.Euler(_startAngle + openingAngle, 0, 0);
-                Destroy(gameObject);
+                transform.parent.localRotation = Quaternion.Euler(openingAngle, startVec.y, startVec.z);
+                isOpening = false;
             }
         }
 
