@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+// using TMPro;
 
 
 public class MenuManager : MonoBehaviour
@@ -13,6 +14,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] public Button ButtonCredits;
     [SerializeField] public Button ButtonQuit;
     [SerializeField] public GameObject ContainerMain;
+
+    // [SerializeField] public TextMeshProUGUI StartText;
 
 
     [Header("Settings Container")]
@@ -47,29 +50,82 @@ public class MenuManager : MonoBehaviour
     [SerializeField] public GameObject ContainerCredits2;
 
 
+    // private vars
+
+    private Material StartTextMaterial;
+
+
     void Start()
     {
+        // MainMenu Buttons
         ButtonStart.onClick.AddListener(StartGame);
         ButtonSettings.onClick.AddListener(OpenSettings);
-        ButtonCredits.onClick.AddListener(OpenCredits);
+        ButtonCredits.onClick.AddListener(OpenCredits1);
         ButtonQuit.onClick.AddListener(QuitGame);
+
+        // Closing seperate windows
+        ButtonSettingsX.onClick.AddListener(OpenMainMenu);
+        ButtonCredits1X.onClick.AddListener(OpenMainMenu);
+        ButtonCredits2X.onClick.AddListener(OpenMainMenu);
+
+        // Credits Pageing
+        ButtonNextPage.onClick.AddListener(OpenCredits2);
+        ButtonPrevPage.onClick.AddListener(OpenCredits1);
+
+        // StartText.color = new Color32(251, 1, 223, 255);
     }
 
 
     void StartGame()
     {
-        Debug.Log("Start Button Pressed.");
+        Debug.Log("Start Button Pressed --> Starting Game.");
+        // YANNIK Start game here
     }
 
 
     void OpenSettings() 
     {
-        Debug.Log("Settings Button Pressed.");
+        Debug.Log("Settings Button Pressed --> Opening Settings Screen.");
+        ContainerMain.SetActive(false);
+        ContainerCredits1.SetActive(false);
+        ContainerCredits2.SetActive(false);
+
+        ContainerSettings.SetActive(true);
     }
 
-    void OpenCredits() 
+    void OpenCredits1() 
     {
-        Debug.Log("Credits Button Pressed.");
+        Debug.Log("Credits1 Button Pressed --> Opening Credits Page1.");
+
+        ContainerMain.SetActive(false);
+        ContainerSettings.SetActive(false);
+        ContainerCredits2.SetActive(false);
+
+        ContainerCredits1.SetActive(true);
+    }
+
+
+    void OpenCredits2() 
+    {
+        Debug.Log("Credits2 Button Pressed --> Opening Credits Page2.");
+
+        ContainerMain.SetActive(false);
+        ContainerSettings.SetActive(false);
+        ContainerCredits1.SetActive(false);
+
+        ContainerCredits2.SetActive(true);
+    }
+
+
+    void OpenMainMenu() 
+    {
+        Debug.Log("Close Menu Button Pressed --> Opening Main Menu.");
+
+        ContainerSettings.SetActive(false);
+        ContainerCredits1.SetActive(false);
+        ContainerCredits2.SetActive(false);
+
+        ContainerMain.SetActive(true);
     }
 
 
