@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class MenuManager : MonoBehaviour
@@ -57,10 +58,16 @@ public class MenuManager : MonoBehaviour
     [SerializeField] public GameObject ContainerPause;
     [SerializeField] public GameObject ContainerSure;
 
-    // private vars
 
+    [Header("End Container")]
+    [SerializeField] public Button ButtonMain2;
+    [SerializeField] public GameObject ContainerEnd;
+
+
+    // private vars
     private Material StartTextMaterial;
     private bool isPaused = false;
+    private bool isMain = false;
 
 
     void Start()
@@ -88,8 +95,11 @@ public class MenuManager : MonoBehaviour
         ButtonQuit2.onClick.AddListener(OpenSure);
 
         // Sure Menu
-        ButtonYes.onClick.AddListener(QuitGame);
+        ButtonYes.onClick.AddListener(ConfirmSureMenu);
         ButtonNo.onClick.AddListener(OpenPauseMenu);
+
+        // End Menu
+        ButtonMain2.onClick.AddListener(OpenMainMenu);
     }
 
 
@@ -97,8 +107,8 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("Start Button Pressed --> Starting Game.");
         // YANNIK Start game here
-
-    }   // YANNIK du kannst die funktion OpenPauseMenu(); ausführen um das pausenmenu zu öffnen... duh! (Set it on ESC)
+    }   
+        
 
 
     void OpenSettings() 
@@ -145,9 +155,9 @@ public class MenuManager : MonoBehaviour
         ButtonStart.Select();
     }
 
-    void OpenPauseMenu() 
+    void OpenPauseMenu() // YANNIK du kannst die funktion OpenPauseMenu(); ausführen um das pausenmenu zu öffnen... duh! (Set it on ESC)
     {
-        Debug.Log("Pause Button Pressed --> Pausing the Game.");
+        Debug.Log("Pausing the Game.");
 
         HideAllContainers();
         ContainerPause.SetActive(true);
@@ -158,9 +168,21 @@ public class MenuManager : MonoBehaviour
     }
 
 
+    void OpenEndMenu() // YANNIK Wenn du OpenEndMenu(); Machst kannst du End Screen ausführen.
+    {
+        Debug.Log("GameOver Screen.");
+
+        HideAllContainers();
+        ContainerEnd.SetActive(true);
+
+        ButtonMain2.Select();
+    }
+    
+
+
     void OpenSure() 
     {
-        Debug.Log("Quit Button Pressed --> Asking if this guy is a chicken or not.");
+        Debug.Log("Quit/MainMenu Button Pressed --> Asking if this guy is a chicken or not.");
 
         HideAllContainers();
         ContainerSure.SetActive(true);
@@ -182,6 +204,19 @@ public class MenuManager : MonoBehaviour
     }
 
 
+    void ConfirmSureMenu()
+    {
+        if (isMain)
+        {
+            OpenMainMenu();
+        }
+        else
+        {
+            QuitGame();
+        }
+    }
+
+
     void QuitGame()
     {
         Debug.Log("Quit Button Pressed --> Exiting Game.");
@@ -196,5 +231,6 @@ public class MenuManager : MonoBehaviour
         ContainerCredits2.SetActive(false);
         ContainerPause.SetActive(false);
         ContainerSure.SetActive(false);
+        ContainerEnd.SetActive(false);
     }
 }
