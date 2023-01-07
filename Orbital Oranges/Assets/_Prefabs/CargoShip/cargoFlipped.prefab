@@ -111,7 +111,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.00059001334
+  m_Radius: 0.0025
   m_Center: {x: -0.009655808, y: 0.007110401, z: -0.0008966579}
 --- !u!114 &1049556782077151255
 MonoBehaviour:
@@ -126,9 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingTime: 3
-  openingAngle: 90
+  openingAngle: 180
   closedMat: {fileID: 2100000, guid: 6d32f1503018d054f81c8dfb1de41ced, type: 2}
   openedMat: {fileID: 2100000, guid: 288da3a9877a80944b2d07dd9782361d, type: 2}
+  startVec: {x: 0, y: 0, z: 180}
 --- !u!1 &7144597960866591107
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +294,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7850525802970703544}
-  m_LocalRotation: {x: 0.000000030908623, y: 0.7071068, z: 0.7071067, w: 0.000000030908616}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: -0.22797585, y: 1.3858956, z: 0.31438762}
   m_LocalScale: {x: 153.76646, y: 158.41124, z: 146.65022}
   m_ConstrainProportionsScale: 0
@@ -301,7 +302,7 @@ Transform:
   - {fileID: 3283247179044787358}
   m_Father: {fileID: 7524781953034136377}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 270, y: 0, z: 180}
 --- !u!33 &3578295953300655699
 MeshFilter:
   m_ObjectHideFlags: 0

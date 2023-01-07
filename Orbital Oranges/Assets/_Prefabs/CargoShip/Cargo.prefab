@@ -343,6 +343,7 @@ MonoBehaviour:
   openingAngle: 180
   closedMat: {fileID: 2100000, guid: 6d32f1503018d054f81c8dfb1de41ced, type: 2}
   openedMat: {fileID: 2100000, guid: 288da3a9877a80944b2d07dd9782361d, type: 2}
+  startVec: {x: 0, y: 0, z: 0}
 --- !u!64 &4679637459894678917
 MeshCollider:
   m_ObjectHideFlags: 0
