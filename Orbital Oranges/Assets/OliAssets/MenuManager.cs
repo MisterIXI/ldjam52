@@ -91,6 +91,7 @@ public class MenuManager : MonoBehaviour
         ContainerCredits2.SetActive(false);
 
         ContainerSettings.SetActive(true);
+        ButtonGamepadForwards.Select();
     }
 
     void OpenCredits1() 
