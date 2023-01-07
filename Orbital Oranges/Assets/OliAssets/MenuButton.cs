@@ -22,11 +22,11 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
 
     public void OnSelect(BaseEventData eventData)
     {
-        _buttonText.color = new Color32 (155,255,055,255);
+        _buttonText.color = new Color32 (0, 231, 245, 255);
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        _buttonText.color = new Color32 (222,222,222,255);
+        _buttonText.color = new Color32 (255,255,255,255);
     }
 }

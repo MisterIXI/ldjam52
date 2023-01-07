@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-// using TMPro;
 
 
 public class MenuManager : MonoBehaviour
@@ -14,8 +13,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] public Button ButtonCredits;
     [SerializeField] public Button ButtonQuit;
     [SerializeField] public GameObject ContainerMain;
-
-    // [SerializeField] public TextMeshProUGUI StartText;
 
 
     [Header("Settings Container")]
@@ -71,8 +68,6 @@ public class MenuManager : MonoBehaviour
         // Credits Pageing
         ButtonNextPage.onClick.AddListener(OpenCredits2);
         ButtonPrevPage.onClick.AddListener(OpenCredits1);
-
-        // StartText.color = new Color32(251, 1, 223, 255);
     }
 
 
@@ -91,6 +86,7 @@ public class MenuManager : MonoBehaviour
         ContainerCredits2.SetActive(false);
 
         ContainerSettings.SetActive(true);
+
         ButtonGamepadForwards.Select();
     }
 
@@ -103,6 +99,8 @@ public class MenuManager : MonoBehaviour
         ContainerCredits2.SetActive(false);
 
         ContainerCredits1.SetActive(true);
+
+        ButtonNextPage.Select();
     }
 
 
@@ -115,6 +113,8 @@ public class MenuManager : MonoBehaviour
         ContainerCredits1.SetActive(false);
 
         ContainerCredits2.SetActive(true);
+
+        ButtonPrevPage.Select();
     }
 
 
@@ -127,6 +127,8 @@ public class MenuManager : MonoBehaviour
         ContainerCredits2.SetActive(false);
 
         ContainerMain.SetActive(true);
+
+        ButtonStart.Select();
     }
 
 
