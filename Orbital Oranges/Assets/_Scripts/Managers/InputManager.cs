@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
         if (RefManager.inputManager != null)
         {
             Destroy(this);
+            Destroy(gameObject);
             return;
         }
         RefManager.inputManager = this;
@@ -86,6 +87,4 @@ public class InputManager : MonoBehaviour
     {
         OnPause(context);
     }
-
-
 }
