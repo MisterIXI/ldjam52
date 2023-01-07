@@ -47,9 +47,20 @@ public class MenuManager : MonoBehaviour
     [SerializeField] public GameObject ContainerCredits2;
 
 
+    [Header("Pause/Sure Container")]
+    [SerializeField] public Button ButtonResume;
+    [SerializeField] public Button ButtonSettings2;
+    [SerializeField] public Button ButtonMain;
+    [SerializeField] public Button ButtonQuit2;
+    [SerializeField] public Button ButtonYes;
+    [SerializeField] public Button ButtonNo;
+    [SerializeField] public GameObject ContainerPause;
+    [SerializeField] public GameObject ContainerSure;
+
     // private vars
 
     private Material StartTextMaterial;
+    private bool isPaused = false;
 
 
     void Start()
@@ -61,13 +72,24 @@ public class MenuManager : MonoBehaviour
         ButtonQuit.onClick.AddListener(QuitGame);
 
         // Closing seperate windows
-        ButtonSettingsX.onClick.AddListener(OpenMainMenu);
+        ButtonSettingsX.onClick.AddListener(CloseSettings);
+
         ButtonCredits1X.onClick.AddListener(OpenMainMenu);
         ButtonCredits2X.onClick.AddListener(OpenMainMenu);
 
         // Credits Pageing
         ButtonNextPage.onClick.AddListener(OpenCredits2);
         ButtonPrevPage.onClick.AddListener(OpenCredits1);
+
+        // Pause Menu
+        ButtonResume.onClick.AddListener(HideAllContainers);
+        ButtonSettings2.onClick.AddListener(OpenSettings);
+        ButtonMain.onClick.AddListener(OpenSure);
+        ButtonQuit2.onClick.AddListener(OpenSure);
+
+        // Sure Menu
+        ButtonYes.onClick.AddListener(QuitGame);
+        ButtonNo.onClick.AddListener(OpenPauseMenu);
     }
 
 
@@ -75,16 +97,15 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("Start Button Pressed --> Starting Game.");
         // YANNIK Start game here
-    }
+
+    }   // YANNIK du kannst die funktion OpenPauseMenu(); ausführen um das pausenmenu zu öffnen... duh! (Set it on ESC)
 
 
     void OpenSettings() 
     {
         Debug.Log("Settings Button Pressed --> Opening Settings Screen.");
-        ContainerMain.SetActive(false);
-        ContainerCredits1.SetActive(false);
-        ContainerCredits2.SetActive(false);
 
+        HideAllContainers();
         ContainerSettings.SetActive(true);
 
         ButtonGamepadForwards.Select();
@@ -94,10 +115,7 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("Credits1 Button Pressed --> Opening Credits Page1.");
 
-        ContainerMain.SetActive(false);
-        ContainerSettings.SetActive(false);
-        ContainerCredits2.SetActive(false);
-
+        HideAllContainers();
         ContainerCredits1.SetActive(true);
 
         ButtonNextPage.Select();
@@ -108,10 +126,7 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("Credits2 Button Pressed --> Opening Credits Page2.");
 
-        ContainerMain.SetActive(false);
-        ContainerSettings.SetActive(false);
-        ContainerCredits1.SetActive(false);
-
+        HideAllContainers();
         ContainerCredits2.SetActive(true);
 
         ButtonPrevPage.Select();
@@ -122,13 +137,48 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("Close Menu Button Pressed --> Opening Main Menu.");
 
-        ContainerSettings.SetActive(false);
-        ContainerCredits1.SetActive(false);
-        ContainerCredits2.SetActive(false);
-
+        HideAllContainers();
         ContainerMain.SetActive(true);
 
+        isPaused = false;
+
         ButtonStart.Select();
+    }
+
+    void OpenPauseMenu() 
+    {
+        Debug.Log("Pause Button Pressed --> Pausing the Game.");
+
+        HideAllContainers();
+        ContainerPause.SetActive(true);
+
+        isPaused = true;
+
+        ButtonResume.Select();
+    }
+
+
+    void OpenSure() 
+    {
+        Debug.Log("Quit Button Pressed --> Asking if this guy is a chicken or not.");
+
+        HideAllContainers();
+        ContainerSure.SetActive(true);
+
+        ButtonNo.Select();
+    }
+
+
+    void CloseSettings()
+    {
+        if (isPaused)
+        {
+            OpenPauseMenu();
+        }
+        else
+        {
+            OpenMainMenu();
+        }
     }
 
 
@@ -137,18 +187,14 @@ public class MenuManager : MonoBehaviour
         Debug.Log("Quit Button Pressed --> Exiting Game.");
         Application.Quit();
     }
+
+    void HideAllContainers()
+    {
+        ContainerMain.SetActive(false);
+        ContainerSettings.SetActive(false);
+        ContainerCredits1.SetActive(false);
+        ContainerCredits2.SetActive(false);
+        ContainerPause.SetActive(false);
+        ContainerSure.SetActive(false);
+    }
 }
-
-
-        // if(ControlsPanel.activeSelf == false)
-        // {
-        //     Debug.Log("Controls Button Pressed --> Showing Controls.");
-        //     CreditsPanel.SetActive(false);
-        //     ResourcesPanel.SetActive(false);
-        //     ControlsPanel.SetActive(true);
-        // }
-        // else
-        // {
-        //     Debug.Log("Controls Button Pressed --> Hiding Controls.");
-        //     ControlsPanel.SetActive(false);
-        // }
