@@ -10,4 +10,6 @@ public class RefManager
     public static InputManager inputManager;
     public static MenuManager menuManager;
     public static SettingsManager settingsManager;
+    public static SpeedIndicator thrustIndicator;
+    public static SpeedIndicator speedIndicator;
 }

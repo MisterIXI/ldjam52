@@ -16,7 +16,10 @@ public class ShipController : MonoBehaviour, IConnector
     private bool _isBreaking;
     [SerializeField] private GameObject _thrusterPrefab;
     private PlayerSettings _playerSettings;
-    private void Awake() {
+    private SpeedIndicator _thrustIndicator;
+    private SpeedIndicator _speedIndicator;
+    private void Awake()
+    {
         _rigidbody = GetComponent<Rigidbody>();
         InitThrusterArrays();
     }
@@ -27,6 +30,8 @@ public class ShipController : MonoBehaviour, IConnector
         SetControlled(true);
         // InitWithThrusters();
         _playerSettings = RefManager.gameManager._playerSettings;
+        _thrustIndicator = RefManager.thrustIndicator;
+        _speedIndicator = RefManager.speedIndicator;
     }
 
     public void InitThrusterArrays()
@@ -100,6 +105,11 @@ public class ShipController : MonoBehaviour, IConnector
             if (_rigidbody.velocity.magnitude < _playerSettings.breakingStopPoint)
                 _rigidbody.velocity = Vector3.zero;
         }
+
+        // _thrustIndicator.VelocityVector = -_rigidbody.velocity.normalized;
+
+        _thrustIndicator.IsBreaking = _isBreaking;
+        _speedIndicator.VelocityVector = transform.InverseTransformDirection(_rigidbody.velocity) * 0.1f;
     }
 
     private Vector3 HandleThrusters()
@@ -151,7 +161,7 @@ public class ShipController : MonoBehaviour, IConnector
             if (thruster != null)
             {
                 thruster.SetTargetStrength(currInput);
-                x_val-= thruster.CurrentStrength;
+                x_val -= thruster.CurrentStrength;
             }
         }
         currArr = _thrusters[Dir.Backward];
