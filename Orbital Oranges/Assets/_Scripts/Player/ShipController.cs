@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class ShipController : MonoBehaviour, IConnector
 {
-
+    [SerializeField] private bool _isPlayer;
     private bool _isControlled;
     private Vector3 _input;
     private bool _isGamePadScheme;
@@ -28,13 +28,14 @@ public class ShipController : MonoBehaviour, IConnector
 
     public void InitThrusterArrays()
     {
+        ConnectorLayout layout = GetComponent<ConnectorLayout>();
         _thrusters[Dir.Default] = new Thruster[0];
-        _thrusters[Dir.Up] = new Thruster[4];
-        _thrusters[Dir.Down] = new Thruster[6];
-        _thrusters[Dir.Left] = new Thruster[4];
-        _thrusters[Dir.Right] = new Thruster[4];
-        _thrusters[Dir.Forward] = new Thruster[3];
-        _thrusters[Dir.Backward] = new Thruster[3];
+        _thrusters[Dir.Up] = new Thruster[layout.up.Length];
+        _thrusters[Dir.Down] = new Thruster[layout.down.Length];
+        _thrusters[Dir.Left] = new Thruster[layout.left.Length];
+        _thrusters[Dir.Right] = new Thruster[layout.right.Length];
+        _thrusters[Dir.Forward] = new Thruster[layout.forward.Length];
+        _thrusters[Dir.Backward] = new Thruster[layout.backward.Length];
     }
     public void HandleDisconnect(Dir dir, int id)
     {
