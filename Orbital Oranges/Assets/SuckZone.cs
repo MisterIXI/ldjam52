@@ -21,7 +21,7 @@ public class SuckZone : MonoBehaviour
         Collider[] colliders = other.transform.root.GetComponentsInChildren<Collider>();
         foreach (Collider collider in colliders)
         {
-            collider.enabled = false;
+            collider.isTrigger = true;
         }
         rb.angularDrag = 2;
         // rb.drag = 1;

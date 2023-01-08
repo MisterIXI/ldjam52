@@ -140,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7524781953034136377}
   m_Layer: 0
-  m_Name: cargoFlipped
+  m_Name: CargoContainerFlipped
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
