@@ -42,7 +42,7 @@ Material:
     - _Scale: 8.25
     m_Colors:
     - _EmptyColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
-    - _ProgressColor: {r: 2.6037736, g: 0.50812644, b: 0, a: 1}
+    - _ProgressColor: {r: 0, g: 2.6037736, b: 0.53349096, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &4160507313071157041
 MonoBehaviour:

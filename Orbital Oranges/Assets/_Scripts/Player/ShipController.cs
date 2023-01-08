@@ -16,13 +16,16 @@ public class ShipController : MonoBehaviour, IConnector
     private bool _isBreaking;
     [SerializeField] private GameObject _thrusterPrefab;
     private PlayerSettings _playerSettings;
-    private void Start()
-    {
+    private void Awake() {
         _rigidbody = GetComponent<Rigidbody>();
         InitThrusterArrays();
+    }
+    private void Start()
+    {
+        // InitThrusterArrays();
         SubcribeToInput();
         SetControlled(true);
-        InitWithThrusters();
+        // InitWithThrusters();
         _playerSettings = RefManager.gameManager._playerSettings;
     }
 
@@ -37,7 +40,11 @@ public class ShipController : MonoBehaviour, IConnector
         _thrusters[Dir.Forward] = new Thruster[layout.forward.Length];
         _thrusters[Dir.Backward] = new Thruster[layout.backward.Length];
     }
-    public void HandleDisconnect(Dir dir, int id)
+    public void AddThruster(Thruster thruster, Dir dir, int id)
+    {
+        _thrusters[dir][id] = thruster;
+    }
+    public void HandleDisconnect(Dir dir, int id, IConnectable connectable)
     {
         _thrusters[dir][id] = null;
     }
