@@ -14,6 +14,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6b251965c145b434793b7c81a760d4e2,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6b251965c145b434793b7c81a760d4e2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6b251965c145b434793b7c81a760d4e2,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6b251965c145b434793b7c81a760d4e2,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.3127358
       objectReference: {fileID: 0}
@@ -80,8 +95,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4666310199900609603}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1052956368
-MeshCollider:
+--- !u!54 &7631060072807274894
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5477355397370519826}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &-4320905839495271490
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,10 +121,23 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6723580601522748004, guid: 6b251965c145b434793b7c81a760d4e2, type: 3}
+  m_Radius: 0.90420914
+  m_Height: 2.10305
+  m_Direction: 1
+  m_Center: {x: -0.06470258, y: 1.068631, z: 0.0000000057848606}
+--- !u!114 &-7419868931244156147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5477355397370519826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9728ed967681a3944aaa33d3b345fb0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 0.25
 --- !u!114 &1052956367
 MonoBehaviour:
   m_ObjectHideFlags: 0

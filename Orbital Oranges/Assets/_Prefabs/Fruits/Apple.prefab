@@ -14,6 +14,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 675bb0a3532ef524ca5a780c5695e261,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 675bb0a3532ef524ca5a780c5695e261,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 675bb0a3532ef524ca5a780c5695e261,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 675bb0a3532ef524ca5a780c5695e261,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.996951
       objectReference: {fileID: 0}
@@ -80,8 +95,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4792913680628586607}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1792295960
-MeshCollider:
+--- !u!54 &8605995846607207409
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5639263510345491774}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &-2174466954442279975
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,10 +121,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -472147775963580301, guid: 675bb0a3532ef524ca5a780c5695e261, type: 3}
+  m_Radius: 0.70598906
+  m_Height: 1.4752932
+  m_Direction: 1
+  m_Center: {x: -0.058499075, y: 0.7697443, z: -0.043538157}
 --- !u!114 &1792295959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,3 +140,16 @@ MonoBehaviour:
   outlineMaterial: {fileID: 2100000, guid: a83c0ef3075abf94abfd4dd68cb0603e, type: 2}
   outlineScaleFactor: -1.1
   outlineColor: {r: 1, g: 0.40315855, b: 0, a: 0}
+--- !u!114 &7056524615803230585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5639263510345491774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9728ed967681a3944aaa33d3b345fb0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 0.25
