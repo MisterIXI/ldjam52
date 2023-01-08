@@ -16,12 +16,16 @@ public class SuckZone : MonoBehaviour
     IEnumerator MoveToCenter(GameObject other)
     {
         Vector3 startPos = other.transform.position;
+        Rigidbody rb = other.transform.root.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.angularDrag = 1;
         while (_timeElapsed < openingTime)
         {
             _timeElapsed += Time.deltaTime;
 
             Vector3 currentPos = Vector3.Lerp(startPos, transform.position, curve.Evaluate(_timeElapsed / openingTime));
-            other.transform.position = currentPos;
+            rb.MovePosition(currentPos);
             yield return null;
         }
         Shoot(other);
