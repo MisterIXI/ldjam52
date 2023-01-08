@@ -82,7 +82,7 @@ public class ShipController : MonoBehaviour, IConnector
         angle_y = Mathf.MoveTowardsAngle(angle_y, angle_y + _lookInput.x * _playerSettings.cameraSensitivity, _playerSettings.cameraSensitivity);
         Quaternion newRotation = Quaternion.Euler(angle_x, angle_y, 0);
         _rigidbody.MoveRotation(newRotation);
-        Debug.Log("new euler x: " + transform.rotation.eulerAngles.x);
+        //Debug.Log("new euler x: " + transform.rotation.eulerAngles.x);
 
         _thrusterForce = HandleThrusters();
         _rigidbody.AddForce(_thrusterForce, ForceMode.Acceleration);

@@ -30,7 +30,8 @@ public class SuckZone : MonoBehaviour
     }
     void Shoot(GameObject shootableObject)
     {
-        shootableObject.GetComponent<Rigidbody>().velocity = transform.right * suckForce;
+
+        shootableObject.transform.position = transform.right * suckForce;
         Destroy(shootableObject, 4f);
     }
 }

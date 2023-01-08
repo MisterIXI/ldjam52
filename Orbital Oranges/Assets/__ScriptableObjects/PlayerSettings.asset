@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2be5af6903a7ab4789ca3232b2e0067, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  cameraSensitivity: 2
-  mouseMultiplier: 0.2
-  mousePointDrag: 1.5
-  angularBreakingPower: 0.1
-  breakingStopPoint: 0.3
+  cameraSensitivity: 1
+  mouseMultiplier: 0.25
+  mousePointDrag: 2.5
+  angularBreakingPower: 0.5
+  breakingStopPoint: 0.5
