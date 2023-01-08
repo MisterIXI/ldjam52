@@ -111,7 +111,7 @@ public class ShipController : MonoBehaviour, IConnector
         Vector3 tempInput = _input;
         if (_isBreaking)
         {
-            tempInput = -(_rigidbody.velocity);
+            tempInput = (_rigidbody.velocity);
             tempInput = Vector3.ClampMagnitude(tempInput, 1);
             // tempInput = tempInput.normalized;
         }
@@ -121,7 +121,7 @@ public class ShipController : MonoBehaviour, IConnector
             if (thruster != null)
             {
                 thruster.SetTargetStrength(-currInput);
-                y_val -= thruster.CurrentStrength;
+                y_val += thruster.CurrentStrength;
             }
         }
         currArr = _thrusters[Dir.Up];
@@ -131,7 +131,7 @@ public class ShipController : MonoBehaviour, IConnector
             if (thruster != null)
             {
                 thruster.SetTargetStrength(currInput);
-                y_val += thruster.CurrentStrength;
+                y_val -= thruster.CurrentStrength;
             }
         }
         currArr = _thrusters[Dir.Left];
@@ -141,7 +141,7 @@ public class ShipController : MonoBehaviour, IConnector
             if (thruster != null)
             {
                 thruster.SetTargetStrength(-currInput);
-                x_val -= thruster.CurrentStrength;
+                x_val += thruster.CurrentStrength;
             }
         }
         currArr = _thrusters[Dir.Right];
@@ -151,7 +151,7 @@ public class ShipController : MonoBehaviour, IConnector
             if (thruster != null)
             {
                 thruster.SetTargetStrength(currInput);
-                x_val += thruster.CurrentStrength;
+                x_val-= thruster.CurrentStrength;
             }
         }
         currArr = _thrusters[Dir.Backward];
@@ -161,7 +161,7 @@ public class ShipController : MonoBehaviour, IConnector
             if (thruster != null)
             {
                 thruster.SetTargetStrength(-currInput);
-                z_val -= thruster.CurrentStrength;
+                z_val += thruster.CurrentStrength;
             }
         }
         currArr = _thrusters[Dir.Forward];
@@ -171,7 +171,7 @@ public class ShipController : MonoBehaviour, IConnector
             if (thruster != null)
             {
                 thruster.SetTargetStrength(currInput);
-                z_val += thruster.CurrentStrength;
+                z_val -= thruster.CurrentStrength;
             }
         }
         Vector3 result = new Vector3(x_val, y_val, z_val);
@@ -190,7 +190,7 @@ public class ShipController : MonoBehaviour, IConnector
         if (_isControlled)
         {
             Vector2 input = context.ReadValue<Vector2>();
-            _input = new Vector3(input.x, _input.y, input.y);
+            _input = new Vector3(-input.x, _input.y, -input.y);
             // Debug.Log("New input: " + _input);
         }
     }
@@ -200,7 +200,7 @@ public class ShipController : MonoBehaviour, IConnector
         if (_isControlled && !context.started)
         {
             float input = context.ReadValue<float>();
-            _input = new Vector3(_input.x, input, _input.z);
+            _input = new Vector3(_input.x, -input, _input.z);
             // Debug.Log("New input: " + _input);
         }
     }
