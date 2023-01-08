@@ -69,6 +69,14 @@ public class MenuManager : MonoBehaviour
     private bool isPaused = false;
     private bool isMain = false;
 
+    private void Awake() {
+        if(RefManager.menuManager != null) {
+            Destroy(gameObject);
+            return;
+        }
+        RefManager.menuManager = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
