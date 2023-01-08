@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1113069780982687204}
+  - component: {fileID: 5727116436918950382}
+  - component: {fileID: 3533108950700593928}
   m_Layer: 0
   m_Name: CargoContainer
   m_TagString: Untagged
@@ -36,6 +38,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5727116436918950382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304480870566313822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9728ed967681a3944aaa33d3b345fb0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 3
+--- !u!54 &3533108950700593928
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304480870566313822}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &859525482326272101
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1134cb24e6e4ccb4f863d6226d57a4f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnableObject:
+  - {fileID: 8001976335469108835, guid: 8a8ac17caa5c72349aacd1e6b72b0835, type: 3}
 --- !u!1 &3159108634325804382
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1134cb24e6e4ccb4f863d6226d57a4f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnableObject:
+  - {fileID: 8001976335469108835, guid: 8a8ac17caa5c72349aacd1e6b72b0835, type: 3}
 --- !u!1 &6121206649572230489
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1134cb24e6e4ccb4f863d6226d57a4f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnableObject:
+  - {fileID: 8001976335469108835, guid: 8a8ac17caa5c72349aacd1e6b72b0835, type: 3}
 --- !u!1 &6313260559990198390
 GameObject:
   m_ObjectHideFlags: 0
