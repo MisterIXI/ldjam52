@@ -22,16 +22,24 @@ public class PlayerInteraction : MonoBehaviour
             layers = ~layers;
             Debug.DrawRay(transform.position, transform.forward * interactionDistance, Color.red);
             RaycastHit hit;
-            if(Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, layers) && hit.collider.GetComponent<IInteractable>() != null)
+            if(Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, layers))
             {
-                IInteractable interactableObject = hit.collider.GetComponent<IInteractable>();
-                interactableObject.Interact();
-            }
-            else
-            {
-                hit.collider.gameObject.transform.root.rotation = Quaternion.Euler(0, 0, 0);
-            }
-                
+
+                if(hit.collider.GetComponent<IInteractable>() != null)
+                {
+                    IInteractable interactableObject = hit.collider.GetComponent<IInteractable>();
+                    interactableObject.Interact();
+                }
+                else
+                {
+                    Rigidbody[] bodies = hit.collider.transform.root.GetComponentsInChildren<Rigidbody>();
+                    foreach(Rigidbody rb in bodies)
+                    {
+                        rb.drag = 2;
+                        rb.angularDrag = 2;
+                    }
+                }
+            }   
         }
     }
 }

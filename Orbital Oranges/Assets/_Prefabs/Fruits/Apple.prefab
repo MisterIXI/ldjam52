@@ -87,6 +87,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apple
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 675bb0a3532ef524ca5a780c5695e261,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cargo
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 675bb0a3532ef524ca5a780c5695e261, type: 3}
 --- !u!1 &5639263510345491774 stripped
@@ -125,6 +130,19 @@ CapsuleCollider:
   m_Height: 1.4752932
   m_Direction: 1
   m_Center: {x: -0.058499075, y: 0.7697443, z: -0.043538157}
+--- !u!114 &-5524419539632518024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5639263510345491774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d638478316f3ee4493f3b0c35c7745e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 1
 --- !u!114 &1792295959
 MonoBehaviour:
   m_ObjectHideFlags: 0
