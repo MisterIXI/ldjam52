@@ -787,7 +787,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  suckForce: 20
+  suckForce: 50
   openingTime: 5
 --- !u!65 &353466503
 BoxCollider:
@@ -1055,6 +1055,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5407344816116957334, guid: 74165962ad008bb48bf299f3b6ae6c9f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5407344816116957335, guid: 74165962ad008bb48bf299f3b6ae6c9f,
         type: 3}
       propertyPath: m_RootOrder
@@ -1270,10 +1275,16 @@ MonoBehaviour:
   amountSpawnableCargo: 100
   cargoObjects:
   - {fileID: 304480870566313822, guid: c5d671cda0b1aec4981e3b9aec2e624e, type: 3}
+  - {fileID: 3588012378877206692, guid: f495ad74f5259354e90feeb172bb4f97, type: 3}
   - {fileID: 5639263510345491774, guid: 8e34a447eef93444b98a7bfd61028460, type: 3}
   - {fileID: 649164197328669095, guid: 76e7363fc3a21a6469fe08d663b57701, type: 3}
   - {fileID: 5477355397370519826, guid: ebed76426773e364faf517bf67caeeb8, type: 3}
   - {fileID: 8398106519716001192, guid: 033c8fe0c3bd74b4b96d58f084ae34db, type: 3}
+  - {fileID: 7934512372756523380, guid: b11156f9b1faabd49ae78b2cccc08b58, type: 3}
+  - {fileID: 4789506769060060498, guid: 6543ed14756d4634390c78bc50f3c471, type: 3}
+  - {fileID: 2129664303295674842, guid: 1d09407715d660f48a6138ea24f15554, type: 3}
+  - {fileID: 6471890359943586271, guid: cc0683bb0ed662a43b292ace1fddca0e, type: 3}
+  - {fileID: 337786015101712313, guid: b763529bbd85fd64088c3bd7aa99cf94, type: 3}
 --- !u!4 &768968578
 Transform:
   m_ObjectHideFlags: 0
