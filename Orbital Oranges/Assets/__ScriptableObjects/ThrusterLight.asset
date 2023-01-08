@@ -15,3 +15,4 @@ MonoBehaviour:
   Strength: 15.9
   Acceleration: 20
   Deceleration: 20
+  ParticleSpeedRange: {x: 0.5, y: 15}
