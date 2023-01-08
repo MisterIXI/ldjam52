@@ -10,4 +10,7 @@ public class ThrusterSettings : ScriptableObject {
     [Header("Responsiveness")]
     [Range(0f,20f)] public float Acceleration = 3f;
     [Range(0f,20f)] public float Deceleration = 3f;
+
+    [Header("Visuals")]
+    public Vector2 ParticleSpeedRange = new Vector2(0.5f, 15f);
 }
