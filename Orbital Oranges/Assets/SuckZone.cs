@@ -26,7 +26,6 @@ public class SuckZone : MonoBehaviour
         rb.angularDrag = 2;
         // rb.drag = 1;
         // isSucking == moving towards center
-        bool isSucking = true;
         float lastCall = Time.time;
         while (Vector3.Distance(otherTransform.position, transform.position) > 0.5f)
         {
