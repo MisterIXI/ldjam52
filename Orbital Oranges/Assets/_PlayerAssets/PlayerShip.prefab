@@ -926,7 +926,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dir: 5
   _slot: 1
-  _startObject: {fileID: 0}
+  _startObject: {fileID: 4956264092630823711, guid: d610c1dcf75dd5e44adb3757551a125e,
+    type: 3}
   _objectRotation: {x: 90, y: 0, z: 0}
   _drawGizmos: 1
   _connectedMat: {fileID: 2100000, guid: d82dc71f1b0f30e43a363036c99ad3ff, type: 2}
@@ -964,7 +965,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dir: 5
   _slot: 0
-  _startObject: {fileID: 0}
+  _startObject: {fileID: 4956264092630823711, guid: d610c1dcf75dd5e44adb3757551a125e,
+    type: 3}
   _objectRotation: {x: 90, y: 0, z: 0}
   _drawGizmos: 1
   _connectedMat: {fileID: 2100000, guid: d82dc71f1b0f30e43a363036c99ad3ff, type: 2}
