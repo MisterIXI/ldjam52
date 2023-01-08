@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_ProgressBar
+  m_Name: Shader Graphs_ProgressBar 1
   m_Shader: {fileID: -6465566751694194690, guid: 2f1a7a9a606d7c64b97102439dc284f4,
     type: 3}
   m_ValidKeywords: []

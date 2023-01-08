@@ -9,6 +9,8 @@ public class ConnectorPoint : MonoBehaviour, IConnector
     [SerializeField] private GameObject _startObject;
     [SerializeField] private Vector3 _objectRotation;
     [SerializeField] private bool _drawGizmos = true;
+    [SerializeField] private Material _connectedMat;
+    [SerializeField] private Material _disconnectedMat;
     private ShipController _ship;
     private SphereCollider _connectionCollider;
 
