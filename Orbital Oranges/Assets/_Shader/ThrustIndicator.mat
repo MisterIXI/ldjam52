@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_ProgressBar 1
+  m_Name: ThrustIndicator
   m_Shader: {fileID: -6465566751694194690, guid: 2f1a7a9a606d7c64b97102439dc284f4,
     type: 3}
   m_ValidKeywords: []
@@ -35,8 +35,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Offset: 0.66
-    - _Progress: 0.712
+    - _Offset: 0.2
+    - _Progress: 0.6
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scale: 8.25
