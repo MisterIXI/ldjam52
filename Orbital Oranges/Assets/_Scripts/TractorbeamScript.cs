@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TractorbeamScript : MonoBehaviour
 {
-    [SerializeField] public Rigidbody itemRigidbody;
     [SerializeField] public Rigidbody playerRigidbody;
+    [SerializeField] public Rigidbody itemRigidbody;
+
     [SerializeField] public bool active = true;
     [SerializeField] [Range(3,20)] public int minBeamLenght = 6;
 
