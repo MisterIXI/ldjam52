@@ -35,8 +35,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Offset: 0.66
-    - _Progress: 0
+    - _Offset: 0.2
+    - _Progress: 0.6
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scale: 8.25
