@@ -17,6 +17,10 @@ public class OutlineScript : MonoBehaviour
     Renderer CreateOutline(Material outlineMat, float scaleFactor, Color color)
     {
         GameObject outlineObject = Instantiate(this.gameObject, transform.position, transform.rotation, transform);
+        Destroy(outlineObject.GetComponent<RandomSpaceRotation>());
+        Destroy(outlineObject.GetComponent<Collider>());
+        Destroy(outlineObject.GetComponent<Rigidbody>());
+        outlineObject.transform.localScale = new Vector3(1, 1, 1);
         Renderer rend = outlineObject.GetComponent<Renderer>();
 
         rend.material = outlineMat;
