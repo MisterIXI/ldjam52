@@ -14,6 +14,11 @@ public class Thruster : MonoBehaviour, IConnectable
     private Dir _dir;
     private int _slot;
     private IConnector _connector;
+    private SphereCollider _connectionCollider;
+
+    private void Start() {
+        _connectionCollider = GetComponent<SphereCollider>();
+    }
 
     private void FixedUpdate()
     {
@@ -38,6 +43,7 @@ public class Thruster : MonoBehaviour, IConnectable
     public void Connect(Dir dir, int slot, IConnector connector)
     {
         IsConnected = true;
+        _connectionCollider.enabled = false;
     }
 
     public void Disconnect()
@@ -47,5 +53,6 @@ public class Thruster : MonoBehaviour, IConnectable
         _connector = null;
         _dir = Dir.Default;
         _slot = -1;
+        _connectionCollider.enabled = true;
     }
 }
