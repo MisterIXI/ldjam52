@@ -6,7 +6,6 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] private AudioClip[] clips = new AudioClip[10];
     private AudioSource audioSource;
-    private bool isFinal = false;
     [SerializeField] private AudioClip mainBG;
 
 
@@ -19,8 +18,6 @@ public class SoundManager : MonoBehaviour
     public void PlayFinalMusic()
     {
         this.audioSource.Stop();
-
-        isFinal = true;
         GameObject soundGameObject = new GameObject("Sound");
         AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
         audioSource.PlayOneShot(getSound("FinalBG"), 1);
