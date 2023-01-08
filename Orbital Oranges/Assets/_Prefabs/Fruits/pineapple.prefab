@@ -87,6 +87,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: pineapple
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 552141e21cdca564f8422a7d11a12ba1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cargo
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 552141e21cdca564f8422a7d11a12ba1, type: 3}
 --- !u!1 &8398106519716001192 stripped
@@ -125,6 +130,19 @@ CapsuleCollider:
   m_Height: 3.8665714
   m_Direction: 1
   m_Center: {x: -0.07811607, y: 1.957695, z: -0.019712688}
+--- !u!114 &-1111002250685867802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8398106519716001192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d638478316f3ee4493f3b0c35c7745e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 5
 --- !u!114 &2033322027
 MonoBehaviour:
   m_ObjectHideFlags: 0
