@@ -19,8 +19,8 @@ public class EndScreenScript : MonoBehaviour
     [SerializeField] public int CargoHarvested = 5; // YANNIK I NEED THOSE :)
     [SerializeField] public int CargoMaximum = 9; // YANNIK I NEED THOSE °o°
 
-    void Start()
-    {
+
+    private void OnEnable() {
         TextHighscore.text = Highscore.ToString();
 
         SliderCargo.value = 0;
@@ -45,8 +45,3 @@ public class EndScreenScript : MonoBehaviour
         }
     }
 }
-
-
-// Maybe fix lerp last percent
-// fix slider reset on hide/unhide
-// fix sure menu
