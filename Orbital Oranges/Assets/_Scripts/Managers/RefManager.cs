@@ -9,4 +9,5 @@ public class RefManager
     public static GameManager gameManager;
     public static InputManager inputManager;
     public static MenuManager menuManager;
+    public static SettingsManager settingsManager;
 }
