@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.035768013, g: 0.059169073, b: 0.22596021, a: 1}
+  m_IndirectSpecularColor: {r: 0.03578102, g: 0.059124853, b: 0.22602917, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -740,7 +740,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  suckForce: 100
+  suckForce: 20
   openingTime: 5
 --- !u!65 &353466503
 BoxCollider:
