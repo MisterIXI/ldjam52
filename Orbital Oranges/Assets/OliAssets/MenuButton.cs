@@ -15,6 +15,17 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
         _button = GetComponent<Button>();
     }
 
+    private void OnEnable() {
+        if (_button.name != "Button-Start")
+        {
+            _buttonText.color = new Color32 (255,255,255,255);
+        }
+        else
+        {
+            _button.Select();
+        }
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         _button.Select();
