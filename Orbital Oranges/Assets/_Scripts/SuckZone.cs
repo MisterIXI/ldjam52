@@ -15,7 +15,6 @@ public class SuckZone : MonoBehaviour
 
     IEnumerator MoveToCenter(GameObject other)
     {
-        Vector3 startPos = other.transform.position;
         Transform otherTransform = other.transform;
         Rigidbody rb = otherTransform.root.GetComponent<Rigidbody>();
         Collider[] colliders = other.transform.root.GetComponentsInChildren<Collider>();
@@ -43,7 +42,16 @@ public class SuckZone : MonoBehaviour
             rb.velocity += transform.right * suckForce;
             yield return new WaitForSeconds(0.1f);
         }
-        Destroy(other, 4f);
+        if(!other.tag.Equals("Player"))
+            Destroy(other, 4f);
+        else
+        {
+            rb.angularDrag = 1;
+            foreach (Collider collider in colliders)
+            {
+                collider.isTrigger = false;
+            }
+        }
     }
 
 }
