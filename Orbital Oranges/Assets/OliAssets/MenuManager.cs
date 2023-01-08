@@ -91,8 +91,8 @@ public class MenuManager : MonoBehaviour
         // Pause Menu
         ButtonResume.onClick.AddListener(HideAllContainers);
         ButtonSettings2.onClick.AddListener(OpenSettings);
-        ButtonMain.onClick.AddListener(OpenSure);
-        ButtonQuit2.onClick.AddListener(OpenSure);
+        ButtonMain.onClick.AddListener(OpenSureMain);
+        ButtonQuit2.onClick.AddListener(OpenSureQuit);
 
         // Sure Menu
         ButtonYes.onClick.AddListener(ConfirmSureMenu);
@@ -188,6 +188,20 @@ public class MenuManager : MonoBehaviour
         ContainerSure.SetActive(true);
 
         ButtonNo.Select();
+    }
+
+
+    void OpenSureQuit()
+    {
+        isMain = false;
+        OpenSure();
+    }
+
+
+    void OpenSureMain()
+    {
+        isMain = true;
+        OpenSure();
     }
 
 
