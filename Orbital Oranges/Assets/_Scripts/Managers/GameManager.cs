@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public PlayerSettings _playerSettings;
     private void Awake()
     {
         if (RefManager.gameManager != null)

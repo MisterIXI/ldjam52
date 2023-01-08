@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99840771c0b86cc4b98cc5874791fd6f, type: 3}
-  m_Name: LightThruster
+  m_Script: {fileID: 11500000, guid: f2be5af6903a7ab4789ca3232b2e0067, type: 3}
+  m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  Strength: 15.9
-  Acceleration: 20
-  Deceleration: 20
+  cameraSensitivity: 2
+  mouseMultiplier: 0.2
+  mousePointDrag: 1.5
+  angularBreakingPower: 0.1
+  breakingStopPoint: 0.3

@@ -15,6 +15,7 @@ public class ShipController : MonoBehaviour, IConnector
     private Vector3 _thrusterForce;
     private bool _isBreaking;
     [SerializeField] private GameObject _thrusterPrefab;
+    private PlayerSettings _playerSettings;
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -22,6 +23,7 @@ public class ShipController : MonoBehaviour, IConnector
         SubcribeToInput();
         SetControlled(true);
         InitWithThrusters();
+        _playerSettings = RefManager.gameManager._playerSettings;
     }
 
     public void InitThrusterArrays()
@@ -56,16 +58,40 @@ public class ShipController : MonoBehaviour, IConnector
     public void FixedUpdate()
     {
         _lookInput = Vector2.MoveTowards(_lookInput, _lookPoint, 0.1f);
-        if(!_isGamePadScheme)
+        if (!_isGamePadScheme)
         {
-            _lookPoint= Vector2.MoveTowards(_lookPoint, Vector2.zero, 0.1f * Time.fixedDeltaTime);
+            _lookPoint = Vector2.MoveTowards(_lookPoint, Vector2.zero, _playerSettings.mousePointDrag * Time.fixedDeltaTime);
         }
         // rotate ship towards _lookInput
-        Quaternion targetRotation = transform.rotation * Quaternion.Euler(0, _lookInput.x, 0) * Quaternion.Euler(-_lookInput.y, 0, 0);
-        Quaternion newRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 100 * Time.fixedDeltaTime);
+        // Quaternion targetRotation = transform.rotation * Quaternion.Euler(0, _lookInput.x, 0) * Quaternion.Euler(-_lookInput.y, 0, 0);
+        // Quaternion newRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 100 * Time.fixedDeltaTime);
+        float angle_x = transform.rotation.eulerAngles.x;
+        float angle_y = transform.rotation.eulerAngles.y;
+        // rotate angle_x by _lookInput.x
+        float old_x = angle_x;
+        angle_x = angle_x - _lookInput.y * _playerSettings.cameraSensitivity;
+        if (angle_x > 85 && angle_x < 180)
+        {
+            angle_x = 85;
+        }
+        if (angle_x > 180 && angle_x < 275)
+        {
+            angle_x = 275;
+        }
+        // angle_x = Mathf.Clamp(angle_x + _lookInput.y * _playerSettings.cameraSensitivity, -89, 89);
+        angle_y = Mathf.MoveTowardsAngle(angle_y, angle_y + _lookInput.x * _playerSettings.cameraSensitivity, _playerSettings.cameraSensitivity);
+        Quaternion newRotation = Quaternion.Euler(angle_x, angle_y, 0);
         _rigidbody.MoveRotation(newRotation);
+        Debug.Log("new euler x: " + transform.rotation.eulerAngles.x);
+
         _thrusterForce = HandleThrusters();
         _rigidbody.AddForce(_thrusterForce, ForceMode.Acceleration);
+        if (_isBreaking)
+        {
+            _rigidbody.angularVelocity = Vector3.MoveTowards(_rigidbody.angularVelocity, Vector3.zero, _playerSettings.angularBreakingPower);
+            if (_rigidbody.velocity.magnitude < _playerSettings.breakingStopPoint)
+                _rigidbody.velocity = Vector3.zero;
+        }
     }
 
     private Vector3 HandleThrusters()
@@ -140,7 +166,10 @@ public class ShipController : MonoBehaviour, IConnector
                 z_val += thruster.CurrentStrength;
             }
         }
-        return new Vector3(x_val, y_val, z_val);
+        Vector3 result = new Vector3(x_val, y_val, z_val);
+        if (!_isBreaking)
+            result = transform.rotation * result;
+        return result;
     }
 
     public void SetControlled(bool isControlled)
@@ -179,6 +208,8 @@ public class ShipController : MonoBehaviour, IConnector
             else if (context.canceled)
             {
                 _isBreaking = false;
+                if (_rigidbody.velocity.magnitude < _playerSettings.breakingStopPoint)
+                    _rigidbody.velocity = Vector3.zero;
             }
         }
     }
@@ -194,9 +225,12 @@ public class ShipController : MonoBehaviour, IConnector
             }
             else
             {
-                Vector2 curr_input = context.ReadValue<Vector2>();
-                curr_input = Vector2.ClampMagnitude(curr_input, 0.5f);
+                // Debug.Log("Delta: " + curr_input);
+                Vector2 curr_input = Vector2.ClampMagnitude(context.ReadValue<Vector2>(), 0.05f) * _playerSettings.mouseMultiplier;
+                // Debug.Log("Clamped: " + curr_input);
+                var old = _lookPoint;
                 _lookPoint = Vector2.ClampMagnitude(_lookPoint + curr_input, 1);
+                // Debug.Log("Look point: " + old + " -> " + _lookPoint);
             }
         }
     }
