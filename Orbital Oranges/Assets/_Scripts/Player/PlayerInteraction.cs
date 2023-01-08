@@ -20,12 +20,16 @@ public class PlayerInteraction : MonoBehaviour
         {
             int layers = 1 << 3;
             layers = ~layers;
-            Debug.DrawRay(transform.position, transform.right * interactionDistance, Color.red);
+            Debug.DrawRay(transform.position, transform.forward * interactionDistance, Color.red);
             RaycastHit hit;
-            if(Physics.Raycast(transform.position, transform.right, out hit, interactionDistance, layers) && hit.collider.GetComponent<IInteractable>() != null)
+            if(Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, layers) && hit.collider.GetComponent<IInteractable>() != null)
             {
                 IInteractable interactableObject = hit.collider.GetComponent<IInteractable>();
                 interactableObject.Interact();
+            }
+            else
+            {
+                hit.collider.gameObject.transform.root.rotation = Quaternion.Euler(0, 0, 0);
             }
                 
         }
