@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99840771c0b86cc4b98cc5874791fd6f, type: 3}
-  m_Name: LightThruster
+  m_Name: ThrusterLight
   m_EditorClassIdentifier: 
   Strength: 15.9
   Acceleration: 20
