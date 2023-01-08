@@ -75,8 +75,9 @@ public class MenuManager : MonoBehaviour
             return;
         }
         RefManager.menuManager = this;
+        DontDestroyOnLoad(gameObject);
     }
-    
+
     void Start()
     {
         // MainMenu Buttons
