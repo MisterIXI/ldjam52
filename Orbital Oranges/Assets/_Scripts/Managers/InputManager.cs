@@ -20,6 +20,9 @@ public class InputManager : MonoBehaviour
     public Action<CallbackContext> OnPause = delegate { };
     private PlayerInput playerInput;
     private InputActionMap actionMap;
+
+    public float Mouse_SensMult;
+    public float Gamepad_SensMult;
     public bool IsGamepadScheme { get; private set; }
     private void Awake()
     {
