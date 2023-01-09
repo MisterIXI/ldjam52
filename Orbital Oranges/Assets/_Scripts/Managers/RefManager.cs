@@ -14,4 +14,5 @@ public class RefManager
     public static SpeedIndicator speedIndicator;
     public static CameraManager cameraManager;
     public static SoundManager soundManager;
+    public static PlayerInteraction playerInteraction;
 }

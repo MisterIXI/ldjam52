@@ -78,7 +78,6 @@ GameObject:
   - component: {fileID: 1588544525894189281}
   - component: {fileID: 1303873315981516386}
   - component: {fileID: 4147510440993650409}
-  - component: {fileID: 1981874072}
   m_Layer: 3
   m_Name: PlayerShip
   m_TagString: PlayerShip
@@ -148,6 +147,8 @@ MonoBehaviour:
   _isPlayer: 0
   _thrusterPrefab: {fileID: 5657796310737741247, guid: 814a19191f602804a99138c9d3c15907,
     type: 3}
+  _playerSeat: {fileID: 2081968555361076043}
+  _playerBot: {fileID: 0}
   showGizmos: 1
 --- !u!114 &216500652146508025
 MonoBehaviour:
@@ -222,19 +223,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.64, y: 2.13, z: 8.0300455}
   m_Center: {x: 0, y: 0.78999996, z: -2.9726095}
---- !u!114 &1981874072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5407344816116957334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37795b62c2658dc48b074ba830bc0194, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionDistance: 5
 --- !u!1001 &7819619261412314172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -342,6 +330,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 74472fa27918dc241b53e08bf7406d13, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 133c6539a396c3b458be5c1936a10cfa,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 732a3eeb8e1078744a6f9d11a833af1f, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 133c6539a396c3b458be5c1936a10cfa,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a80140143562514c95ea5a0e001ade3, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 133c6539a396c3b458be5c1936a10cfa,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0bfa44d58441cf64d8b5dfd8f881937c, type: 2}
     - target: {fileID: -7275110849317765035, guid: 133c6539a396c3b458be5c1936a10cfa,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

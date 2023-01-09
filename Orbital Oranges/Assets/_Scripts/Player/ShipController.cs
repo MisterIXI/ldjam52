@@ -16,9 +16,11 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
     private bool _isBreaking;
     [SerializeField] private GameObject _thrusterPrefab;
     [SerializeField] private Transform _playerSeat;
+    [SerializeField] private ShipController _playerBot;
     private PlayerSettings _playerSettings;
     private SpeedIndicator _thrustIndicator;
     private SpeedIndicator _speedIndicator;
+    private PlayerInteraction _playerInteraction;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -73,8 +75,7 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
         _thrusters[Dir.Backward][0] = Instantiate(_thrusterPrefab, transform).GetComponent<Thruster>();
         _thrusters[Dir.Backward][0].Connect(Dir.Backward, 0, this);
     }
-    public void FixedUpdate()
-    {
+    private void Update() {
         _lookInput = Vector2.MoveTowards(_lookInput, _lookPoint, 0.1f);
         if (!_isGamePadScheme)
         {
@@ -102,6 +103,15 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
         _rigidbody.MoveRotation(newRotation);
         //Debug.Log("new euler x: " + transform.rotation.eulerAngles.x);
 
+        if(_isPlayer && !_isControlled)
+        {
+            transform.position = _playerSeat.position;
+            transform.rotation = _playerSeat.rotation;
+        }
+    }
+    public void FixedUpdate()
+    {
+        
         _thrusterForce = HandleThrusters();
         _rigidbody.AddForce(_thrusterForce, ForceMode.Acceleration);
         if (_isBreaking)
@@ -243,7 +253,7 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
         {
             if (_isGamePadScheme)
             {
-                Debug.Log("Delta: " + context.ReadValue<Vector2>());
+                // Debug.Log("Delta: " + context.ReadValue<Vector2>());
                 _lookPoint = context.ReadValue<Vector2>();
 
             }
@@ -270,7 +280,14 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
     {
         if (!_isPlayer)
         {
-
+            _playerBot.transform.position = _playerSeat.position;
+            _playerBot.transform.rotation = _playerSeat.rotation;
+            _playerBot.transform.parent = _playerSeat;
+            _playerBot._isControlled = false;
+            _playerBot.TakeASeat();
+            _playerBot._rigidbody.isKinematic = true;
+            _playerBot.GetComponent<SphereCollider>().enabled = false;
+            StartCoroutine(ShipControlDelay());
         }
     }
     public string GetInteractText() => "Enter Ship";
@@ -279,7 +296,37 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
         _isGamePadScheme = isGamepadNow;
         _lookInput = Vector2.zero;
     }
-
+    public void TakeASeat()
+    {
+        _rigidbody.velocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.zero;
+        _input = Vector3.zero;
+        _lookInput = Vector2.zero;
+        _lookPoint = Vector2.zero;
+        _isBreaking = false;
+    }
+    public IEnumerator ShipControlDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _isControlled = true;
+    }
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if (!_isPlayer)
+        {
+            if (_isControlled)
+            {
+                if (context.performed)
+                {
+                    _playerBot.transform.parent = null;
+                    _playerBot._isControlled = true;
+                    _isControlled = false;
+                    _playerBot._rigidbody.isKinematic = false;
+                    _playerBot.GetComponent<SphereCollider>().enabled = true;
+                }
+            }
+        }
+    }
     public void SubcribeToInput()
     {
         InputManager inputManager = RefManager.inputManager;
@@ -290,6 +337,7 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
             inputManager.OnVerticalMove += OnVerticalMovement;
             inputManager.OnBreak += OnBreakInput;
             inputManager.OnLook += OnLookInput;
+            inputManager.OnInteract += OnInteractInput;
         }
     }
 
@@ -303,6 +351,7 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
             inputManager.OnVerticalMove -= OnVerticalMovement;
             inputManager.OnBreak -= OnBreakInput;
             inputManager.OnLook -= OnLookInput;
+            inputManager.OnInteract -= OnInteractInput;
         }
     }
 

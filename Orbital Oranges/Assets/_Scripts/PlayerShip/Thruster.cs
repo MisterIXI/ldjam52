@@ -59,6 +59,12 @@ public class Thruster : MonoBehaviour, IConnectable
         _connector = connector;
         _dir = dir;
         _slot = slot;
+        TractorBeamTarget tractorBeamTarget = GetComponent<TractorBeamTarget>();
+        if (tractorBeamTarget != null)
+        {
+            if (tractorBeamTarget.ConnectedBeam != null)
+                tractorBeamTarget.ConnectedBeam.SelfDestruct();
+        }
     }
 
     public void Disconnect()
@@ -69,5 +75,6 @@ public class Thruster : MonoBehaviour, IConnectable
         _dir = Dir.Default;
         _slot = -1;
         _connectionCollider.enabled = true;
+        GetComponent<Rigidbody>().isKinematic = false;
     }
 }

@@ -55,6 +55,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5868967831625315172}
   - component: {fileID: 4701781505776589140}
+  - component: {fileID: -6472474225933671828}
+  - component: {fileID: 7558222735887697004}
+  - component: {fileID: 5886645404711751744}
   m_Layer: 0
   m_Name: HardThruster
   m_TagString: Connectable
@@ -94,6 +97,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settings: {fileID: 11400000, guid: 7b545214d2b9d3147a681c9040a55a6e, type: 2}
   _particleSystem: {fileID: 1777150035294754582}
+--- !u!54 &-6472474225933671828
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4956264092630823711}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &7558222735887697004
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4956264092630823711}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.67
+  m_Height: 2.4
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5886645404711751744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4956264092630823711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04b86eccd505e042a414670249f14d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFruit: 0
 --- !u!1001 &4028052034310371832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -337,6 +383,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 44669dacca2dfcf4abd462ac18832706,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a80140143562514c95ea5a0e001ade3, type: 2}
     - target: {fileID: -7511558181221131132, guid: 44669dacca2dfcf4abd462ac18832706,
         type: 3}
       propertyPath: m_Materials.Array.data[1]

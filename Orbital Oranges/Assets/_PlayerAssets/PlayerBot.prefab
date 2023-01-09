@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 5690143935529539527}
   - component: {fileID: 4934281564075518336}
   - component: {fileID: 3615842292052335446}
+  - component: {fileID: 2144962498001130415}
   m_Layer: 0
   m_Name: PlayerBot
   m_TagString: Player
@@ -250,6 +251,7 @@ MonoBehaviour:
   _thrusterPrefab: {fileID: 8459572725437510628, guid: 99653b37168691049a93464acea055b3,
     type: 3}
   _playerSeat: {fileID: 0}
+  _playerBot: {fileID: 0}
   showGizmos: 0
 --- !u!114 &5690143935529539527
 MonoBehaviour:
@@ -304,6 +306,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.46
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2144962498001130415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716410681954007039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37795b62c2658dc48b074ba830bc0194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 5
+  currentTractorBeam: {fileID: 0}
+  TractorBeamPrefab: {fileID: 3704768968338033503, guid: 8bdaf68fdd6b06142b7cc8e9d0a8e5ac,
+    type: 3}
 --- !u!1 &4357619468356384667
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +624,26 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 58fad9383e0f8e74a8ff4098821fd65d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 732a3eeb8e1078744a6f9d11a833af1f, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 58fad9383e0f8e74a8ff4098821fd65d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 72b3adcac3b32e14f81cb32c4397ee53, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 58fad9383e0f8e74a8ff4098821fd65d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9fa571c61624d334186456f532abc7b1, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 58fad9383e0f8e74a8ff4098821fd65d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0bfa44d58441cf64d8b5dfd8f881937c, type: 2}
     - target: {fileID: 919132149155446097, guid: 58fad9383e0f8e74a8ff4098821fd65d,
         type: 3}
       propertyPath: m_Name
