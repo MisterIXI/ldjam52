@@ -12,6 +12,7 @@ public class CollectorBeam : MonoBehaviour, IConnectable
     private int _slot;
     private Rigidbody _shipRB;
     public TractorbeamScript CurrentTractorbeam { get; private set; }
+    private PlayerInteraction _playerInteraction;
     private void Awake()
     {
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
@@ -20,6 +21,7 @@ public class CollectorBeam : MonoBehaviour, IConnectable
 
     private void Start() {
         _shipRB = GetComponentInParent<Rigidbody>();
+        _playerInteraction = RefManager.playerInteraction;
     }
 
     public bool IsConnected { get; private set; }
@@ -44,7 +46,6 @@ public class CollectorBeam : MonoBehaviour, IConnectable
         _connector = connector;
         _dir = dir;
         _slot = slot;
-
     }
 
     public void Disconnect()
@@ -56,4 +57,6 @@ public class CollectorBeam : MonoBehaviour, IConnectable
         Rigidbody rb = gameObject.AddComponent<Rigidbody>();
         rb.useGravity = false;
     }
+
+
 }

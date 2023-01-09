@@ -4,7 +4,7 @@ public class TractorBeamTarget : MonoBehaviour, IInteractable
 {
 
     private Rigidbody _rigidbody;
-    [SerializeField] private float isFruit;
+    [SerializeField] private bool isFruit;
     private PlayerInteraction _playerInteraction;
     private void Start()
     {
@@ -14,15 +14,23 @@ public class TractorBeamTarget : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if(_playerInteraction.currentTractorBeam == null)
+
+        if (_playerInteraction.currentTractorBeam == null)
         {
             _playerInteraction.currentTractorBeam = Instantiate(_playerInteraction.TractorBeamPrefab).GetComponent<TractorbeamScript>();
             _playerInteraction.currentTractorBeam.itemRigidbody = _rigidbody;
+            _playerInteraction.currentTractorBeam.targetTransform = _playerInteraction.transform;
+            _playerInteraction.currentTractorBeam.playerRigidbody = _playerInteraction.gameObject.GetComponent<Rigidbody>();
         }
         else
         {
-            
+            CollectorBeam beam = gameObject.GetComponent<CollectorBeam>();
+            if (beam != null)
+            {
+                beam.ConnectTractorBeam(_playerInteraction.currentTractorBeam);
+            }
         }
+
     }
 
     public string GetInteractText()

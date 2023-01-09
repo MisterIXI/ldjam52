@@ -320,6 +320,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionDistance: 5
   currentTractorBeam: {fileID: 0}
+  TractorBeamPrefab: {fileID: 3704768968338033503, guid: 8bdaf68fdd6b06142b7cc8e9d0a8e5ac,
+    type: 3}
 --- !u!1 &4357619468356384667
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,8 @@ public class TractorbeamScript : MonoBehaviour
     [SerializeField] public Rigidbody itemRigidbody;
     public Transform targetTransform;
     [SerializeField] public bool active = true;
-    [SerializeField] [Range(3,20)] public int minBeamLenght = 6;
+    [SerializeField] [Range(3,20)] public int minBeamLenght = 5;
+    [SerializeField] private float _pullStrength = 100f;
 
     private LineRenderer _lineRenderer;
 
@@ -18,7 +19,7 @@ public class TractorbeamScript : MonoBehaviour
     }
 
     
-    void Update()
+    void FixedUpdate()
     {
         if(itemRigidbody == null)
         {
@@ -29,8 +30,10 @@ public class TractorbeamScript : MonoBehaviour
             // Moving Item towards sphere
             if (Vector3.Distance(itemRigidbody.transform.position, transform.position) > minBeamLenght)
             {
-                Vector3 itemForce = Vector3.Lerp(itemRigidbody.transform.position, transform.position, Time.deltaTime); // Lerping the for needed for the banana
-
+                // Vector3 itemForce = Vector3.Lerp(, Time.deltaTime); // Lerping the for needed for the banana
+                Vector3 itemForce = (targetTransform.position - itemRigidbody.transform.position) * _pullStrength * Time.fixedDeltaTime; // Lerping the for needed for the banana
+                itemRigidbody.velocity = itemRigidbody.velocity * 0.9f;
+                itemRigidbody.angularVelocity = itemRigidbody.angularVelocity / 2;
                 // itemRigidbody.transform.position = itemForce;   // moving banana
                 // itemRigidbody.MovePosition(itemForce);   // moving banana
                 itemRigidbody.AddForce(itemForce);   // adding force to banana
@@ -41,7 +44,7 @@ public class TractorbeamScript : MonoBehaviour
             // transform.position = new Vector3(playerRigidbody.transform.position.x, playerRigidbody.transform.position.y - 1.5f, playerRigidbody.transform.position.z);
             transform.position = targetTransform.position;
             // Drawing a line between them.
-            _lineRenderer.SetPosition(0, transform.position);
+            _lineRenderer.SetPosition(0, targetTransform.position);
             _lineRenderer.SetPosition(1, new Vector3 (itemRigidbody.transform.position.x, itemRigidbody.transform.position.y + 1, itemRigidbody.transform.position.z));
         }
     }

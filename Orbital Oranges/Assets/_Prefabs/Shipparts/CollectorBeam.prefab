@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 4433920327376172523}
   - component: {fileID: 8184170556402014620}
   - component: {fileID: 7793478607199157767}
+  - component: {fileID: 3697398376883280930}
   m_Layer: 0
   m_Name: CollectorBeam
   m_TagString: Connectable
@@ -158,6 +159,19 @@ CapsuleCollider:
   m_Height: 1.99
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!114 &3697398376883280930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6004603895190244641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04b86eccd505e042a414670249f14d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFruit: 0
 --- !u!1001 &8380092415198905679
 PrefabInstance:
   m_ObjectHideFlags: 0

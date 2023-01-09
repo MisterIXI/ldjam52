@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 4448183640087650019}
   - component: {fileID: 1538259031352111323}
   - component: {fileID: 3578179843614826660}
+  - component: {fileID: -8218168374389280915}
   m_Layer: 0
   m_Name: LightThruster
   m_TagString: Connectable
@@ -126,6 +127,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8218168374389280915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9000487896411379398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04b86eccd505e042a414670249f14d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFruit: 0
 --- !u!1001 &931603969266348865
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -210,7 +210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cb5129303cd4547bb401ce682766c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemRigidbody: {fileID: 0}
   playerRigidbody: {fileID: 0}
+  itemRigidbody: {fileID: 0}
+  targetTransform: {fileID: 0}
   active: 1
-  minBeamLenght: 6
+  minBeamLenght: 5
+  _pullStrength: 100

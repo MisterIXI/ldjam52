@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 4701781505776589140}
   - component: {fileID: -6472474225933671828}
   - component: {fileID: 7558222735887697004}
+  - component: {fileID: 5886645404711751744}
   m_Layer: 0
   m_Name: HardThruster
   m_TagString: Connectable
@@ -126,6 +127,19 @@ CapsuleCollider:
   m_Height: 2.4
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5886645404711751744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4956264092630823711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04b86eccd505e042a414670249f14d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFruit: 0
 --- !u!1001 &4028052034310371832
 PrefabInstance:
   m_ObjectHideFlags: 0

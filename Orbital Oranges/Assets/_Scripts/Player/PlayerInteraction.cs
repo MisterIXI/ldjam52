@@ -37,7 +37,7 @@ public class PlayerInteraction : MonoBehaviour
                 IInteractable interactableObject = hit.collider.GetComponent<IInteractable>();
                 interactText.text = interactableObject.GetInteractText();
             }
-            Debug.Log("Ray hit: " + hit.collider.name);
+            // Debug.Log("Ray hit: " + hit.collider.name);
         }
         else
         {
