@@ -106,8 +106,7 @@ public class ShipController : MonoBehaviour, IConnector
                 _rigidbody.velocity = Vector3.zero;
         }
 
-        // _thrustIndicator.VelocityVector = -_rigidbody.velocity.normalized;
-
+        _thrustIndicator.VelocityVector = -_input;
         _thrustIndicator.IsBreaking = _isBreaking;
         _speedIndicator.VelocityVector = transform.InverseTransformDirection(_rigidbody.velocity) * 0.1f;
     }
