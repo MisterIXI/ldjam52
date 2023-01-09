@@ -20,6 +20,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] public Button ButtonSettingsX;
     [SerializeField] public Slider SliderMusic;
     [SerializeField] public Slider SliderSFX;
+    [SerializeField] public Slider SliderMouseSensitivity;
+    [SerializeField] public Slider SliderGamepadSensitivity;
     [SerializeField] public GameObject ContainerSettings;
 
 
@@ -123,6 +125,11 @@ public class MenuManager : MonoBehaviour
 
         RefManager.inputManager.OnPause += PauseMenuClicked;
         RefManager.gameManager.OnGameStateChange += OnGameStateChange;
+
+        SliderGamepadSensitivity.onValueChanged.AddListener(MakeSliderClick);
+        SliderMouseSensitivity.onValueChanged.AddListener(MakeSliderClick);
+        SliderMusic.onValueChanged.AddListener(MakeSliderClick);
+        SliderSFX.onValueChanged.AddListener(MakeSliderClick);
     }
 
     private void Update()
@@ -340,5 +347,10 @@ public class MenuManager : MonoBehaviour
         ContainerSure.SetActive(false);
         ContainerEnd.SetActive(false);
         ContainerHUD.SetActive(false);
+    }
+
+    public void MakeSliderClick(float newVal)
+    {
+        RefManager.soundManager.playhoverSFX();
     }
 }

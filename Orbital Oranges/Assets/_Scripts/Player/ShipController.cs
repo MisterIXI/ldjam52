@@ -21,6 +21,8 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
     private SpeedIndicator _thrustIndicator;
     private SpeedIndicator _speedIndicator;
     private PlayerInteraction _playerInteraction;
+    private float MouseSensitivity;
+    private float GamepadSensitivity;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -39,6 +41,10 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
         _playerSettings = RefManager.gameManager._playerSettings;
         _thrustIndicator = RefManager.thrustIndicator;
         _speedIndicator = RefManager.speedIndicator;
+        RefManager.settingsManager.OnGamepadSensitivityChanged += OnGamepadSensChange;
+        RefManager.settingsManager.OnMouseSensitivityChanged += OnMouseSensChange;
+        OnGamepadSensChange(5);
+        OnMouseSensChange(5);
     }
 
     public void InitThrusterArrays()
@@ -75,7 +81,8 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
         _thrusters[Dir.Backward][0] = Instantiate(_thrusterPrefab, transform).GetComponent<Thruster>();
         _thrusters[Dir.Backward][0].Connect(Dir.Backward, 0, this);
     }
-    private void Update() {
+    private void Update()
+    {
         _lookInput = Vector2.MoveTowards(_lookInput, _lookPoint, 0.1f);
         if (!_isGamePadScheme)
         {
@@ -103,7 +110,7 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
         _rigidbody.MoveRotation(newRotation);
         //Debug.Log("new euler x: " + transform.rotation.eulerAngles.x);
 
-        if(_isPlayer && !_isControlled)
+        if (_isPlayer && !_isControlled)
         {
             transform.position = _playerSeat.position;
             transform.rotation = _playerSeat.rotation;
@@ -111,7 +118,7 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
     }
     public void FixedUpdate()
     {
-        
+
         _thrusterForce = HandleThrusters();
         _rigidbody.AddForce(_thrusterForce, ForceMode.Acceleration);
         if (_isBreaking)
@@ -254,13 +261,13 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
             if (_isGamePadScheme)
             {
                 // Debug.Log("Delta: " + context.ReadValue<Vector2>());
-                _lookPoint = context.ReadValue<Vector2>();
+                _lookPoint = context.ReadValue<Vector2>() * GamepadSensitivity;
 
             }
             else
             {
                 // Debug.Log("Delta: " + curr_input);
-                Vector2 curr_input = Vector2.ClampMagnitude(context.ReadValue<Vector2>(), 0.05f) * _playerSettings.mouseMultiplier *10;
+                Vector2 curr_input = Vector2.ClampMagnitude(context.ReadValue<Vector2>(), 0.05f) * _playerSettings.mouseMultiplier * MouseSensitivity;
                 // Debug.Log("Clamped: " + curr_input);
                 var old = _lookPoint;
                 _lookPoint = Vector2.ClampMagnitude(_lookPoint + curr_input, 1);
@@ -370,5 +377,15 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
             Gizmos.color = Color.blue;
             Gizmos.DrawRay(transform.position, transform.forward * _thrusterForce.z);
         }
+    }
+
+    public void OnMouseSensChange(float newValue)
+    {
+        MouseSensitivity = newValue * 2;
+    }
+
+    public void OnGamepadSensChange(float newValue)
+    {
+        GamepadSensitivity = newValue / 5f;
     }
 }

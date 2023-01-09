@@ -22,7 +22,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
         }
         else
         {
-            _button.Select();
+            // _button.Select();
         }
     }
 

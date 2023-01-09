@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private AudioClip[] clips = new AudioClip[10];
-    private AudioSource audioSource;
+    private AudioSource musicAudioSource;
+    private AudioSource sfxAudioSource;
     [SerializeField] private AudioClip mainBG;
     [SerializeField] private AudioClip finalBG;
     [SerializeField] private AudioClip menuBG;
@@ -16,6 +17,7 @@ public class SoundManager : MonoBehaviour
     private bool _gameRunning;
 
     public float volumeScale = 1;
+    private SettingsManager _settingsManager;
     private void Awake()
     {
         if (RefManager.soundManager != null)
@@ -28,19 +30,35 @@ public class SoundManager : MonoBehaviour
     }
     void Start()
     {
-        audioSource = Camera.main.GetComponent<AudioSource>();
-        audioSource.loop = false;
+        musicAudioSource = Camera.main.GetComponent<AudioSource>();
+        musicAudioSource.loop = false;
+        sfxAudioSource = Camera.main.gameObject.AddComponent<AudioSource>();
+        musicAudioSource.volume = 0.5f;
+        sfxAudioSource.volume = 0.5f;
         RefManager.gameManager.OnGameStateChange += OnGameStateChange;
+
         Debug.Log("SoundManager: Start");
+        _settingsManager = RefManager.settingsManager;
+        _settingsManager.OnMusicVolumeChanged += OnMusicVolumeChanged;
+        _settingsManager.OnSFXVolumeChanged += OnSFXVolumeChanged;
+    }
+    public void OnMusicVolumeChanged(float newVolume)
+    {
+        musicAudioSource.volume = newVolume / 10f;
+    }
+
+    public void OnSFXVolumeChanged(float newVolume)
+    {
+        sfxAudioSource.volume = newVolume / 10f;
     }
     public void PauseMusic()
     {
-        audioSource.Pause();
+        musicAudioSource.Pause();
     }
 
     public void UnPauseMusic()
     {
-        audioSource.Play();
+        musicAudioSource.Play();
     }
     private void OnDestroy()
     {
@@ -56,20 +74,20 @@ public class SoundManager : MonoBehaviour
                 _startTime = Time.time;
                 _gameRunning = true;
                 _finalStageTriggered = false;
-                audioSource.clip = mainBG;
-                audioSource.loop = false;
-                audioSource.Play();
+                musicAudioSource.clip = mainBG;
+                musicAudioSource.loop = false;
+                musicAudioSource.Play();
                 break;
             case GameManager.state.Critical:
-                audioSource.clip = finalBG;
-                audioSource.loop = false;
-                audioSource.Play();
+                musicAudioSource.clip = finalBG;
+                musicAudioSource.loop = false;
+                musicAudioSource.Play();
                 break;
             case GameManager.state.Menu:
                 _gameRunning = false;
-                audioSource.clip = menuBG;
-                audioSource.Play();
-                audioSource.loop = true;
+                musicAudioSource.clip = menuBG;
+                musicAudioSource.Play();
+                musicAudioSource.loop = true;
                 break;
             default:
                 _gameRunning = false;
@@ -88,30 +106,16 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(string name, float volumeScale)
-    {
-       // GameObject soundGameObject = new GameObject("Sound");
-        audioSource.PlayOneShot(getSound(name), volumeScale);
-    }
     public void playhoverSFX()
     {
-        audioSource.PlayOneShot(hoverSFX, volumeScale);
+        if (sfxAudioSource != null)
+            sfxAudioSource.PlayOneShot(hoverSFX);
     }
     public void playclickSFX()
     {
-        audioSource.PlayOneShot(clickSFX, volumeScale);
+        if (sfxAudioSource != null)
+            sfxAudioSource.PlayOneShot(clickSFX);
     }
-    private AudioClip getSound(string _name)
-    {
-        AudioClip _myAudioClip = clips[0];
-        foreach (AudioClip i in clips)
-        {
-            if (_name == i.name)
-            {
-                _myAudioClip = i;
-            }
-        }
-        return _myAudioClip;
-    }
+
 
 }
