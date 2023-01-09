@@ -10,8 +10,17 @@ public class GameManager : MonoBehaviour
     private Scene _currentScene;
     private AsyncOperation _operation;
     public const int GAME_DURATION = 600;
-    public Action<bool> OnGameStateChange = delegate { };
+    public const int GAME_CRITICAL_STAGE = 459;
+    public Action<state> OnGameStateChange = delegate { };
     public float _clockTime { get; private set; }
+    private state _currentState = state.Menu;
+    public enum state
+    {
+        None,
+        running,
+        Critical,
+        Menu
+    }
     private void Awake()
     {
         if (RefManager.gameManager != null)
@@ -25,14 +34,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
-        _operation.allowSceneActivation = false;
+        // _operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+        // _operation.allowSceneActivation = false;
 
+        OnGameStateChange += OnStateChange;
         SceneManager.sceneLoaded += OnSceneLoaded;
         _currentScene = SceneManager.GetActiveScene();
         _clockTime = -1f;
+        StartCoroutine(DelayedStart());
     }
-
+    private IEnumerator DelayedStart()
+    {
+        // trigger first scene loaded one frame after actually loading since OnSceneLoaded doesn't trigger the first time otherwise
+        yield return null;
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("Scene loaded: " + scene.name + " " + mode + " -----------");
@@ -43,10 +59,13 @@ public class GameManager : MonoBehaviour
         {
             _operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
             _operation.allowSceneActivation = false;
+            OnGameStateChange(state.Menu);
+            Cursor.lockState = CursorLockMode.None;
         }
         if (scene.buildIndex == 1)
         {
             GameStart();
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
@@ -62,7 +81,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Time.time - _clockTime >= GAME_DURATION)
+        if (_currentState != state.Critical &&Time.time - _clockTime >= GAME_CRITICAL_STAGE)
+        {
+            OnGameStateChange(state.Critical);
+        }
+        if (_currentState == state.Critical &&Time.time - _clockTime >= GAME_DURATION)
         {
             GameEnd();
         }
@@ -71,12 +94,17 @@ public class GameManager : MonoBehaviour
     private void GameStart()
     {
         _clockTime = Time.time;
-        OnGameStateChange(true);
+        OnGameStateChange(state.running);
     }
 
     public void GameEnd()
     {
         RefManager.menuManager.gameRunning = false;
-        OnGameStateChange(false);
+        OnGameStateChange(state.None);
+    }
+
+    private void OnStateChange(state newState)
+    {
+        _currentState = newState;
     }
 }

@@ -12,4 +12,6 @@ public class RefManager
     public static SettingsManager settingsManager;
     public static SpeedIndicator thrustIndicator;
     public static SpeedIndicator speedIndicator;
+    public static CameraManager cameraManager;
+    public static SoundManager soundManager;
 }

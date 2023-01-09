@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Connectable
+  - Cargo
+  - PlayerShip
+  - Connector
   layers:
   - Default
   - TransparentFX
