@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99840771c0b86cc4b98cc5874791fd6f, type: 3}
   m_Name: ThrusterMedium
   m_EditorClassIdentifier: 
-  Strength: 50
+  Strength: 25
   Acceleration: 3
   Deceleration: 3
+  ParticleSpeedRange: {x: 0.5, y: 15}
