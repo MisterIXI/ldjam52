@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     private Scene _oldScene;
     private Scene _currentScene;
     private AsyncOperation _operation;
+    private const int CLOCK_START_TIME = 600;
+    public float _clockTime { get; private set; }
     private void Awake()
     {
         if (RefManager.gameManager != null)
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         _currentScene = SceneManager.GetActiveScene();
+        _clockTime = -1f;
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -35,10 +38,14 @@ public class GameManager : MonoBehaviour
         _operation = null;
         // SceneManager.UnloadSceneAsync(_currentScene);
         // _currentScene = scene;
-        if(scene.buildIndex == 0)
+        if (scene.buildIndex == 0)
         {
             _operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
             _operation.allowSceneActivation = false;
+        }
+        if (scene.buildIndex == 1)
+        {
+            GameStart();
         }
     }
 
@@ -52,4 +59,23 @@ public class GameManager : MonoBehaviour
         _operation.allowSceneActivation = allowSceneActivation;
     }
 
+    private void Update()
+    {
+        if(Time.time - _clockTime >= CLOCK_START_TIME)
+        {
+            GameEnd();
+        }
+    }
+
+    private void GameStart()
+    {
+        _clockTime = Time.time;
+        RefManager.menuManager.StartTime = _clockTime;
+        RefManager.menuManager.gameRunning = true;
+    }
+
+    public void GameEnd()
+    {
+        RefManager.menuManager.gameRunning = false;
+    }
 }

@@ -65,7 +65,11 @@ public class MenuManager : MonoBehaviour
 
     [Header("HUD Container")]
     [SerializeField] public GameObject ContainerHUD;
+    [SerializeField] public TextMeshProUGUI TextTime;
 
+
+    public float StartTime;
+    public bool gameRunning;
     private GameManager _gameManager;
     // private vars
     private Material StartTextMaterial;
@@ -119,6 +123,19 @@ public class MenuManager : MonoBehaviour
         RefManager.inputManager.OnPause += PauseMenuClicked;
     }
 
+    private void Update()
+    {
+        if (gameRunning)
+        {
+            float time = Time.time - StartTime;
+            string formattedTime = string.Format("{0:00}:{1:00}", time / 60, time % 60);
+            TextTime.text = formattedTime;
+        }
+        else
+        {
+            TextTime.text = "00:00";
+        }
+    }
 
     void StartGame()
     {
