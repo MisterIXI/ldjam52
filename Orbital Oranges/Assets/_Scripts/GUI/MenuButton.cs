@@ -34,6 +34,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
     public void OnSelect(BaseEventData eventData)
     {
         _buttonText.color = new Color32 (0, 231, 245, 255);
+        RefManager.soundManager.playhoverSFX();
     }
 
     public void OnDeselect(BaseEventData eventData)
