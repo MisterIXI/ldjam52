@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-
+using UnityEngine.InputSystem;
 
 public class MenuManager : MonoBehaviour
 {
@@ -63,14 +63,19 @@ public class MenuManager : MonoBehaviour
     [SerializeField] public Button ButtonMain2;
     [SerializeField] public GameObject ContainerEnd;
 
+    [Header("HUD Container")]
+    [SerializeField] public GameObject ContainerHUD;
 
+    private GameManager _gameManager;
     // private vars
     private Material StartTextMaterial;
     private bool isPaused = false;
     private bool isMain = false;
 
-    private void Awake() {
-        if(RefManager.menuManager != null) {
+    private void Awake()
+    {
+        if (RefManager.menuManager != null)
+        {
             Destroy(gameObject);
             return;
         }
@@ -97,7 +102,7 @@ public class MenuManager : MonoBehaviour
         ButtonPrevPage.onClick.AddListener(OpenCredits1);
 
         // Pause Menu
-        ButtonResume.onClick.AddListener(HideAllContainers);
+        ButtonResume.onClick.AddListener(ResumeGame);
         ButtonSettings2.onClick.AddListener(OpenSettings);
         ButtonMain.onClick.AddListener(OpenSureMain);
         ButtonQuit2.onClick.AddListener(OpenSureQuit);
@@ -108,18 +113,27 @@ public class MenuManager : MonoBehaviour
 
         // End Menu
         ButtonMain2.onClick.AddListener(OpenMainMenu);
+
+        _gameManager = RefManager.gameManager;
+
+        RefManager.inputManager.OnPause += PauseMenuClicked;
     }
 
 
     void StartGame()
     {
         Debug.Log("Start Button Pressed --> Starting Game.");
-        // YANNIK Start game here
-    }   
-        
+        RefManager.gameManager.AllowTrigger();
+        HideAllContainers();
+        ContainerHUD.SetActive(true);
+    }
 
+    private void OnDestroy()
+    {
+        RefManager.inputManager.OnPause -= PauseMenuClicked;
+    }
 
-    void OpenSettings() 
+    void OpenSettings()
     {
         Debug.Log("Settings Button Pressed --> Opening Settings Screen.");
 
@@ -129,7 +143,7 @@ public class MenuManager : MonoBehaviour
         ButtonGamepadForwards.Select();
     }
 
-    void OpenCredits1() 
+    void OpenCredits1()
     {
         Debug.Log("Credits1 Button Pressed --> Opening Credits Page1.");
 
@@ -140,7 +154,7 @@ public class MenuManager : MonoBehaviour
     }
 
 
-    void OpenCredits2() 
+    void OpenCredits2()
     {
         Debug.Log("Credits2 Button Pressed --> Opening Credits Page2.");
 
@@ -151,7 +165,7 @@ public class MenuManager : MonoBehaviour
     }
 
 
-    void OpenMainMenu() 
+    void OpenMainMenu()
     {
         Debug.Log("Close Menu Button Pressed --> Opening Main Menu.");
 
@@ -163,19 +177,43 @@ public class MenuManager : MonoBehaviour
         ButtonStart.Select();
     }
 
-    void OpenPauseMenu() // YANNIK du kannst die funktion OpenPauseMenu(); ausführen um das pausenmenu zu öffnen... duh! (Set it on ESC)
+
+    void PauseMenuClicked(InputAction.CallbackContext context)
     {
+        if (context.performed)
+        {
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                OpenPauseMenu();
+            }
+        }
+    }
+    void OpenPauseMenu()
+    {
+
         Debug.Log("Pausing the Game.");
 
         HideAllContainers();
         ContainerPause.SetActive(true);
 
         isPaused = true;
+        Time.timeScale = 0;
 
         ButtonResume.Select();
     }
 
+    void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1;
+        HideAllContainers();
 
+        ContainerHUD.SetActive(true);
+    }
     void OpenEndMenu() // YANNIK Wenn du OpenEndMenu(); Machst kannst du End Screen ausführen.
     {
         Debug.Log("GameOver Screen.");
@@ -185,10 +223,10 @@ public class MenuManager : MonoBehaviour
 
         ButtonMain2.Select();
     }
-    
 
 
-    void OpenSure() 
+
+    void OpenSure()
     {
         Debug.Log("Quit/MainMenu Button Pressed --> Asking if this guy is a chicken or not.");
 
@@ -231,6 +269,9 @@ public class MenuManager : MonoBehaviour
         if (isMain)
         {
             OpenMainMenu();
+            _gameManager.LoadMenu(true);
+            isPaused = false;
+            Time.timeScale = 1;
         }
         else
         {
@@ -238,6 +279,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    void MainMenuFromEndScreen()
+    {
+        OpenMainMenu();
+        _gameManager.AllowTrigger();
+    }
 
     void QuitGame()
     {
@@ -254,5 +300,6 @@ public class MenuManager : MonoBehaviour
         ContainerPause.SetActive(false);
         ContainerSure.SetActive(false);
         ContainerEnd.SetActive(false);
+        ContainerHUD.SetActive(false);
     }
 }

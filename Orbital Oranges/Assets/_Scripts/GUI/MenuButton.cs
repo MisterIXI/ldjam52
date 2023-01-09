@@ -10,7 +10,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, ISelectHandler, I
     private TextMeshProUGUI _buttonText;
     private Button _button;
 
-    private void Start() {
+    private void Awake() {
         _buttonText = GetComponentInChildren<TextMeshProUGUI>();
         _button = GetComponent<Button>();
     }

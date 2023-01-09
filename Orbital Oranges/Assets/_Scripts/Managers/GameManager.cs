@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public PlayerSettings _playerSettings;
     private Scene _oldScene;
+    private Scene _currentScene;
     private AsyncOperation _operation;
-    public Action OnSceneLoaded = delegate { };
     private void Awake()
     {
         if (RefManager.gameManager != null)
@@ -20,40 +20,36 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    private void Start() {
-        SceneManager.activeSceneChanged += OnSceneChanged;
-        _operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+    private void Start()
+    {
+        _operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
         _operation.allowSceneActivation = false;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        _currentScene = SceneManager.GetActiveScene();
     }
 
-    public void OnSceneChanged(Scene oldScene, Scene newScene)
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log("Scene loaded: " + scene.name + " " + mode + " -----------");
         _operation = null;
-        if(_oldScene.buildIndex == 0 && newScene.buildIndex == 1)
+        // SceneManager.UnloadSceneAsync(_currentScene);
+        // _currentScene = scene;
+        if(scene.buildIndex == 0)
         {
-            //switch from menu to game
-            SceneManager.UnloadSceneAsync(_oldScene);
-            _operation = null;
-        }
-        if(_oldScene.buildIndex == 1 && newScene.buildIndex == 0)
-        {
-            //switch from game to menu
-            SceneManager.UnloadSceneAsync(_oldScene);
-            _operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+            _operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+            _operation.allowSceneActivation = false;
         }
     }
 
-    public void StartGame()
+    public void AllowTrigger()
     {
         _operation.allowSceneActivation = true;
     }
-    public void LoadMenu()
+    public void LoadMenu(bool allowSceneActivation = false)
     {
-        _operation = SceneManager.LoadSceneAsync(0, LoadSceneMode.Additive);
-        _operation.allowSceneActivation = false;
+        _operation = SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+        _operation.allowSceneActivation = allowSceneActivation;
     }
-    public void EndGame()
-    {
-        _operation.allowSceneActivation = true;
-    }
+
 }

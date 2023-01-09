@@ -42,4 +42,8 @@ public class PlayerInteraction : MonoBehaviour
             }   
         }
     }
+
+    private void OnDestroy() {
+        RefManager.inputManager.OnInteract -= FireRay;
+    }
 }
