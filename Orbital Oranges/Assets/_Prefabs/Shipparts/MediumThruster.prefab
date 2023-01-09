@@ -181,6 +181,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 429637413411354731}
     m_Modifications:
+    - target: {fileID: 3409004402613874414, guid: 1fce2b5969226ce418146a927bee890d,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846593818391695030, guid: 1fce2b5969226ce418146a927bee890d,
+        type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 5484954674436327687, guid: 1fce2b5969226ce418146a927bee890d,
         type: 3}
       propertyPath: m_Name
@@ -214,7 +224,7 @@ PrefabInstance:
     - target: {fileID: 9016759553712665475, guid: 1fce2b5969226ce418146a927bee890d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.23
       objectReference: {fileID: 0}
     - target: {fileID: 9016759553712665475, guid: 1fce2b5969226ce418146a927bee890d,
         type: 3}
