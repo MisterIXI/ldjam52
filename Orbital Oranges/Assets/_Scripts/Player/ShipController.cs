@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class ShipController : MonoBehaviour, IConnector
+public class ShipController : MonoBehaviour, IConnector, IInteractable
 {
     [SerializeField] private bool _isPlayer;
     private bool _isControlled;
@@ -15,6 +15,7 @@ public class ShipController : MonoBehaviour, IConnector
     private Vector3 _thrusterForce;
     private bool _isBreaking;
     [SerializeField] private GameObject _thrusterPrefab;
+    [SerializeField] private Transform _playerSeat;
     private PlayerSettings _playerSettings;
     private SpeedIndicator _thrustIndicator;
     private SpeedIndicator _speedIndicator;
@@ -265,12 +266,20 @@ public class ShipController : MonoBehaviour, IConnector
         }
         UnSubscibeToInput();
     }
+    public void Interact()
+    {
+        if (!_isPlayer)
+        {
 
+        }
+    }
+    public string GetInteractText() => "Enter Ship";
     public void OnControlSchemeChanged(bool isGamepadNow)
     {
         _isGamePadScheme = isGamepadNow;
         _lookInput = Vector2.zero;
     }
+
     public void SubcribeToInput()
     {
         InputManager inputManager = RefManager.inputManager;

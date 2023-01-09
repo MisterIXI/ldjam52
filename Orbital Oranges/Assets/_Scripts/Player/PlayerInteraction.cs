@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using TMPro;
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] float interactionDistance;
+    private TextMeshProUGUI interactText;
     private void Start()
     {
         InputManager inputManager = RefManager.inputManager;
-
+        interactText = RefManager.menuManager.TextInteract;
         inputManager.OnInteract += FireRay;
     }
 
@@ -29,6 +30,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     IInteractable interactableObject = hit.collider.GetComponent<IInteractable>();
                     interactableObject.Interact();
+                    interactText.text = interactableObject.GetInteractText();
                 }
                 else
                 {
@@ -40,6 +42,10 @@ public class PlayerInteraction : MonoBehaviour
                     }
                 }
             }   
+            else
+            {
+                interactText.text = "";
+            }
         }
     }
 

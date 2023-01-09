@@ -66,6 +66,7 @@ public class MenuManager : MonoBehaviour
     [Header("HUD Container")]
     [SerializeField] public GameObject ContainerHUD;
     [SerializeField] public TextMeshProUGUI TextTime;
+    [SerializeField] public TextMeshProUGUI TextInteract;
 
 
     public float StartTime;
