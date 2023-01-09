@@ -58,3 +58,6 @@ MonoBehaviour:
   mainBG: {fileID: 8300000, guid: 28f37106ca011da4a9b9f789392b7b6f, type: 3}
   finalBG: {fileID: 8300000, guid: b7f29b2ca3cba1c42aca505f6a601cd1, type: 3}
   menuBG: {fileID: 8300000, guid: fc36b38889c521f47b86a0f357329f1b, type: 3}
+  hoverSFX: {fileID: 8300000, guid: 5c4f5c751e8a34c41aa67cfe6fd11229, type: 3}
+  clickSFX: {fileID: 0}
+  volumeScale: 1

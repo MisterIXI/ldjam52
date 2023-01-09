@@ -260,7 +260,7 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
             else
             {
                 // Debug.Log("Delta: " + curr_input);
-                Vector2 curr_input = Vector2.ClampMagnitude(context.ReadValue<Vector2>(), 0.05f) * _playerSettings.mouseMultiplier;
+                Vector2 curr_input = Vector2.ClampMagnitude(context.ReadValue<Vector2>(), 0.05f) * _playerSettings.mouseMultiplier *10;
                 // Debug.Log("Clamped: " + curr_input);
                 var old = _lookPoint;
                 _lookPoint = Vector2.ClampMagnitude(_lookPoint + curr_input, 1);
