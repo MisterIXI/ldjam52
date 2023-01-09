@@ -22,12 +22,16 @@ public class ShipController : MonoBehaviour, IConnector
     {
         _rigidbody = GetComponent<Rigidbody>();
         InitThrusterArrays();
+        if (_isPlayer)
+        {
+            InitWithThrusters();
+            SetControlled(true);
+        }
     }
     private void Start()
     {
         // InitThrusterArrays();
         SubcribeToInput();
-        SetControlled(true);
         // InitWithThrusters();
         _playerSettings = RefManager.gameManager._playerSettings;
         _thrustIndicator = RefManager.thrustIndicator;
@@ -105,10 +109,12 @@ public class ShipController : MonoBehaviour, IConnector
             if (_rigidbody.velocity.magnitude < _playerSettings.breakingStopPoint)
                 _rigidbody.velocity = Vector3.zero;
         }
-
-        _thrustIndicator.VelocityVector = -_input;
-        _thrustIndicator.IsBreaking = _isBreaking;
-        _speedIndicator.VelocityVector = transform.InverseTransformDirection(_rigidbody.velocity) * 0.1f;
+        if (_isControlled)
+        {
+            _thrustIndicator.VelocityVector = -_input;
+            _thrustIndicator.IsBreaking = _isBreaking;
+            _speedIndicator.VelocityVector = transform.InverseTransformDirection(_rigidbody.velocity) * 0.1f;
+        }
     }
 
     private Vector3 HandleThrusters()
