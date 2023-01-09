@@ -30,7 +30,8 @@ public class CollectorBeam : MonoBehaviour, IConnectable
     {
         CurrentTractorbeam = tractorbeam;
         tractorbeam.playerRigidbody = _shipRB;
-        tractorbeam.targetTransform = transform;
+        tractorbeam.targetTransform = _tipTransform;
+        _playerInteraction.currentTractorBeam = null;
     }
 
     public void DisconnectTractorBeam()
@@ -46,6 +47,12 @@ public class CollectorBeam : MonoBehaviour, IConnectable
         _connector = connector;
         _dir = dir;
         _slot = slot;
+        TractorBeamTarget tractorBeamTarget = GetComponent<TractorBeamTarget>();
+        if (tractorBeamTarget != null)
+        {
+            if(tractorBeamTarget.ConnectedBeam != null)
+                tractorBeamTarget.ConnectedBeam.SelfDestruct();
+        }
     }
 
     public void Disconnect()

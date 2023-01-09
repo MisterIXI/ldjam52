@@ -25,7 +25,6 @@ public class ConnectorPoint : MonoBehaviour, IConnector, IInteractable
         {
             var spawnedObject = Instantiate(_startObject, transform.position, Quaternion.identity);
             // align spawnedObject right vector with objectRotation
-            spawnedObject.transform.localRotation = Quaternion.Euler(_objectRotation);
             spawnedObject.GetComponent<IConnectable>().Connect(_dir, _slot, this);
             OnConnect(spawnedObject.GetComponent<IConnectable>());
         }
@@ -41,13 +40,40 @@ public class ConnectorPoint : MonoBehaviour, IConnector, IInteractable
         _connectionCollider.enabled = false;
         MonoBehaviour connectMono = (MonoBehaviour)connectable;
         var rb = connectMono.GetComponent<Rigidbody>();
-        Destroy(rb);
-        ((MonoBehaviour)(connectable)).transform.parent = transform;
+        // Destroy(rb);
+        rb.isKinematic = true;
+        rb.gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+        connectMono.transform.parent = transform;
         if (connectable.GetType() == typeof(Thruster))
         {
             _ship.AddThruster((Thruster)connectable, _dir, _slot);
         }
         _meshRenderer.material = _connectedMat;
+        connectMono.transform.position = transform.position;
+        Transform root = transform.root;
+        switch(_dir)
+        {
+            case Dir.Forward:
+                connectMono.transform.up = root.forward;
+                break;
+            case Dir.Backward:
+                connectMono.transform.up = -root.forward;
+                break;
+            case Dir.Left:
+                connectMono.transform.up = -root.right;
+                break;
+            case Dir.Right:
+                connectMono.transform.up = root.right;
+                break;
+            case Dir.Up:
+                connectMono.transform.up = root.up;
+                break;
+            case Dir.Down:
+                connectMono.transform.up = -root.up;
+                break;
+        }
+        // connectMono.transform.LookAt(transform.position + _objectLookDirection);
+
     }
     private void OnDisconnect(IConnectable connectable)
     {
@@ -60,29 +86,30 @@ public class ConnectorPoint : MonoBehaviour, IConnector, IInteractable
     }
     private IEnumerator DelayedReady()
     {
-        yield return new WaitForSeconds(1f);
+        // yield return new WaitForSeconds(5f);
+        yield return null;
         _connectionCollider.enabled = true;
         _meshRenderer.material = _disconnectedMat;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Connectable"))
-        {
-            IConnectable connectable = other.GetComponent<IConnectable>();
-            if (connectable != null && !connectable.IsConnected)
-            {
-                connectable.Connect(_dir, _slot, this);
-                OnConnect(connectable);
-            }
-        }
+        // if (other.CompareTag("Connectable"))
+        // {
+        //     IConnectable connectable = other.GetComponent<IConnectable>();
+        //     if (connectable != null && !connectable.IsConnected)
+        //     {
+        //         connectable.Connect(_dir, _slot, this);
+        //         OnConnect(connectable);
+        //     }
+        // }
     }
     public void Interact()
     {
-        if(_playerInteraction.currentTractorBeam != null)
+        if (_playerInteraction.currentTractorBeam != null)
         {
             IConnectable connectable = _playerInteraction.currentTractorBeam.itemRigidbody.GetComponent<IConnectable>();
-            if(connectable != null && !connectable.IsConnected)
+            if (connectable != null && !connectable.IsConnected)
             {
                 connectable.Connect(_dir, _slot, this);
                 OnConnect(connectable);

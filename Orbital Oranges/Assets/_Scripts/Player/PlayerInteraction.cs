@@ -69,6 +69,14 @@ public class PlayerInteraction : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                if(currentTractorBeam != null)
+                {
+                    currentTractorBeam.SelfDestruct();
+                    currentTractorBeam = null;
+                }
+            }
         }
     }
 

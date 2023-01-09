@@ -20,6 +20,7 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
     private PlayerSettings _playerSettings;
     private SpeedIndicator _thrustIndicator;
     private SpeedIndicator _speedIndicator;
+    private PlayerInteraction _playerInteraction;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();

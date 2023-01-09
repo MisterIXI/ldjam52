@@ -18,7 +18,16 @@ public class TractorbeamScript : MonoBehaviour
         _lineRenderer = GetComponent<LineRenderer>();
     }
 
-    
+    public void SelfDestruct()
+    {
+        TractorBeamTarget target = itemRigidbody.GetComponent<TractorBeamTarget>();
+        TractorBeamTarget target2 = playerRigidbody.GetComponent<TractorBeamTarget>();
+        if(target != null)
+            target.DisconnectBeam();
+        if(target2 != null)
+            target2.DisconnectBeam();
+        Destroy(gameObject);
+    }
     void FixedUpdate()
     {
         if(itemRigidbody == null)
