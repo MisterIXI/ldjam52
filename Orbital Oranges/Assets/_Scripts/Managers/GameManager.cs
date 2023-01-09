@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     private Scene _oldScene;
     private Scene _currentScene;
     private AsyncOperation _operation;
-    private const int CLOCK_START_TIME = 600;
+    public const int GAME_DURATION = 600;
+    public Action<bool> OnGameStateChange = delegate { };
     public float _clockTime { get; private set; }
     private void Awake()
     {
@@ -61,7 +62,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Time.time - _clockTime >= CLOCK_START_TIME)
+        if(Time.time - _clockTime >= GAME_DURATION)
         {
             GameEnd();
         }
@@ -70,12 +71,12 @@ public class GameManager : MonoBehaviour
     private void GameStart()
     {
         _clockTime = Time.time;
-        RefManager.menuManager.StartTime = _clockTime;
-        RefManager.menuManager.gameRunning = true;
+        OnGameStateChange(true);
     }
 
     public void GameEnd()
     {
         RefManager.menuManager.gameRunning = false;
+        OnGameStateChange(false);
     }
 }

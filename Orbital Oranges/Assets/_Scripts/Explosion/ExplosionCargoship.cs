@@ -7,8 +7,6 @@ public class ExplosionCargoship : MonoBehaviour
     [SerializeField] public GameObject instableCore;
     [SerializeField] public Material ExplosionYellowMat;
     [SerializeField] public Material ExplosionRedwMat;
-    [SerializeField] public bool explode1 = false, explode2 = false;
-    
 
     private GameObject _cargoship;
 
@@ -16,41 +14,99 @@ public class ExplosionCargoship : MonoBehaviour
     private float stage2Emmission = 0.05f;
     private float endEmmission = 1f;
 
-    private float stage1Time = 5f;
-    private float stage2Time = 2.4f;
+    private float stage1Time = 459f;
     private float explosionTime = 0.1f;
 
-    private float _time;
-    
-
+    private float _startTime;
+    private bool _gameRunning;
+    [SerializeField] private AnimationCurve _Stage1Curve;
+    [SerializeField] private AnimationCurve _Stage2Curve;
+    [SerializeField] private float ExplosionRadius = 450f;
+    private Vector3 _startScale;
+    private Vector3 _endScale;
+    private bool _matsSet = false;
+    private bool _exploded = false;
+    private Rigidbody _rb;
     void Start()
     {
         _cargoship = GetComponent<GameObject>();
-        ExplosionYellowMat.SetColor("_EmissionColor", new Color(255,255,0) * startEmmission);
+        ExplosionYellowMat.SetColor("_EmissionColor", new Color(255, 255, 0) * startEmmission);
+        _startScale = instableCore.transform.localScale;
+        _endScale = new Vector3(0.1f, 0.3f, 0.3f);
+        _rb = GetComponent<Rigidbody>();
+        RefManager.gameManager.OnGameStateChange += OnGameStateChange;
     }
-
+    private void OnDestroy()
+    {
+        RefManager.gameManager.OnGameStateChange -= OnGameStateChange;
+    }
+    public void OnGameStateChange(bool newState)
+    {
+        if (newState)
+        {
+            _startTime = Time.time;
+            _gameRunning = true;
+            _matsSet = false;
+            _exploded = false;
+        }
+        else
+        {
+            _gameRunning = false;
+        }
+    }
+    public void StopGame()
+    {
+        _gameRunning = false;
+    }
     void Update()
     {
-        _time += Time.deltaTime;
-        if ((_time > stage1Time) && (_time < (stage1Time + stage2Time)))
+        if (_gameRunning)
         {
-            Material[] TempMats = GetComponent<Renderer>().materials;
-            TempMats[0] = ExplosionRedwMat;
-            TempMats[1] = ExplosionYellowMat;
-            GetComponent<Renderer>().materials = TempMats;
-
-            // lerp the time here
-            float tmp = Mathf.Lerp(startEmmission, stage2Emmission, stage1Time);
-            ExplosionYellowMat.SetColor("_EmissionColor", new Color(255,255,0) * tmp);
+            float timeDelta = Time.time - _startTime;
+            if (timeDelta > stage1Time)
+            {
+                if (timeDelta < GameManager.GAME_DURATION)
+                {
+                    if (!_matsSet)
+                    {
+                        Material[] TempMats = GetComponent<Renderer>().materials;
+                        TempMats[0] = ExplosionRedwMat;
+                        TempMats[1] = ExplosionYellowMat;
+                        GetComponent<Renderer>().materials = TempMats;
+                        _matsSet = true;
+                    }
+                    //Stage 1 
+                    float t = (timeDelta) / stage1Time;
+                    float tmp = Mathf.Lerp(startEmmission, stage2Emmission, _Stage1Curve.Evaluate(t));
+                    ExplosionYellowMat.SetColor("_EmissionColor", new Color(255, 255, 0) * tmp);
+                }
+            }
         }
-        else if (_time >= (stage1Time + stage2Time))
+        else
         {
             // lerp the time here and scale fast
-            ExplosionYellowMat.SetColor("_EmissionColor", new Color(255,255,0) * 1);
-            instableCore.transform.localScale = new Vector3 (0.1f, 0.3f, 0.3f);
+            float t = (Time.time - _startTime - GameManager.GAME_DURATION) / explosionTime;
+            t = _Stage2Curve.Evaluate(Mathf.Clamp(t, 0, 1));
+            float tmp = Mathf.Lerp(stage2Emmission, endEmmission, t);
+            ExplosionYellowMat.SetColor("_EmissionColor", new Color(255, 255, 0) * tmp);
+            instableCore.transform.localScale = Vector3.Lerp(_startScale, _endScale, t);
 
-
-            // YANNIK we could switch to game over screen with a better camera here
+            // Explosion force in radius
+            if (!_exploded)
+            {
+                Collider[] colliders = Physics.OverlapSphere(transform.position, ExplosionRadius);
+                foreach (Collider hit in colliders)
+                {
+                    Rigidbody rb = hit.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.AddExplosionForce(1000f, transform.position, ExplosionRadius, 3.0f);
+                    }
+                }
+                _exploded = true;
+            }
         }
     }
+
+
 }

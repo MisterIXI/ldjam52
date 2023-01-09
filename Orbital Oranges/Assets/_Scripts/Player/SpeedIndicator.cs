@@ -35,6 +35,20 @@ public class SpeedIndicator : MonoBehaviour
             RefManager.thrustIndicator = this;
         }
     }
+
+    private void OnDestroy()
+    {
+        if (_isThrustIndicator)
+        {
+            if (RefManager.thrustIndicator == this)
+                RefManager.thrustIndicator = null;
+        }
+        else
+        {
+            if (RefManager.speedIndicator == this)
+                RefManager.speedIndicator = null;
+        }
+    }
     private void Start()
     {
         VelocityVector = Vector3.zero;

@@ -121,6 +121,7 @@ public class MenuManager : MonoBehaviour
         _gameManager = RefManager.gameManager;
 
         RefManager.inputManager.OnPause += PauseMenuClicked;
+        RefManager.gameManager.OnGameStateChange += OnGameStateChange;
     }
 
     private void Update()
@@ -137,6 +138,18 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    private void OnGameStateChange(bool state)
+    {
+        if (state)
+        {
+            StartTime = Time.time;
+            gameRunning = true;
+        }
+        else
+        {
+            gameRunning = false;
+        }
+    }
     void StartGame()
     {
         Debug.Log("Start Button Pressed --> Starting Game.");
@@ -148,6 +161,8 @@ public class MenuManager : MonoBehaviour
     private void OnDestroy()
     {
         RefManager.inputManager.OnPause -= PauseMenuClicked;
+        if (RefManager.gameManager != null)
+            RefManager.gameManager.OnGameStateChange -= OnGameStateChange;
     }
 
     void OpenSettings()
