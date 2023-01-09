@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class ShipController : MonoBehaviour, IConnector
+public class ShipController : MonoBehaviour, IConnector, IInteractable
 {
     [SerializeField] private bool _isPlayer;
     private bool _isControlled;
@@ -15,6 +15,7 @@ public class ShipController : MonoBehaviour, IConnector
     private Vector3 _thrusterForce;
     private bool _isBreaking;
     [SerializeField] private GameObject _thrusterPrefab;
+    [SerializeField] private Transform _playerSeat;
     private PlayerSettings _playerSettings;
     private SpeedIndicator _thrustIndicator;
     private SpeedIndicator _speedIndicator;
@@ -22,12 +23,16 @@ public class ShipController : MonoBehaviour, IConnector
     {
         _rigidbody = GetComponent<Rigidbody>();
         InitThrusterArrays();
+        if (_isPlayer)
+        {
+            InitWithThrusters();
+            SetControlled(true);
+        }
     }
     private void Start()
     {
         // InitThrusterArrays();
         SubcribeToInput();
-        SetControlled(true);
         // InitWithThrusters();
         _playerSettings = RefManager.gameManager._playerSettings;
         _thrustIndicator = RefManager.thrustIndicator;
@@ -105,11 +110,12 @@ public class ShipController : MonoBehaviour, IConnector
             if (_rigidbody.velocity.magnitude < _playerSettings.breakingStopPoint)
                 _rigidbody.velocity = Vector3.zero;
         }
-
-        // _thrustIndicator.VelocityVector = -_rigidbody.velocity.normalized;
-
-        _thrustIndicator.IsBreaking = _isBreaking;
-        _speedIndicator.VelocityVector = transform.InverseTransformDirection(_rigidbody.velocity) * 0.1f;
+        if (_isControlled)
+        {
+            _thrustIndicator.VelocityVector = -_input;
+            _thrustIndicator.IsBreaking = _isBreaking;
+            _speedIndicator.VelocityVector = transform.InverseTransformDirection(_rigidbody.velocity) * 0.1f;
+        }
     }
 
     private Vector3 HandleThrusters()
@@ -260,12 +266,20 @@ public class ShipController : MonoBehaviour, IConnector
         }
         UnSubscibeToInput();
     }
+    public void Interact()
+    {
+        if (!_isPlayer)
+        {
 
+        }
+    }
+    public string GetInteractText() => "Enter Ship";
     public void OnControlSchemeChanged(bool isGamepadNow)
     {
         _isGamePadScheme = isGamepadNow;
         _lookInput = Vector2.zero;
     }
+
     public void SubcribeToInput()
     {
         InputManager inputManager = RefManager.inputManager;

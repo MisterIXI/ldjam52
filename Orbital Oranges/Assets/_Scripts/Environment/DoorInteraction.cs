@@ -24,20 +24,23 @@ public class DoorInteraction : MonoBehaviour, IInteractable
         if (!once)
         {
             once = true;
-            if(!isOpening)
+            if (!isOpening)
                 isOpening = true;
         }
     }
-    
+    public string GetInteractText()
+    {
+        return "Open container door";
+    }
     void Update()
     {
         if (isOpening)
         {
             _timeElapsed += Time.deltaTime;
-            float currentAngle= Mathf.Lerp(_startAngle, openingAngle, _timeElapsed / openingTime);
+            float currentAngle = Mathf.Lerp(_startAngle, openingAngle, _timeElapsed / openingTime);
             transform.parent.localRotation = Quaternion.Euler(currentAngle, startVec.y, startVec.z);
-     
-            if(_timeElapsed >= openingTime)
+
+            if (_timeElapsed >= openingTime)
             {
                 transform.parent.localRotation = Quaternion.Euler(openingAngle, startVec.y, startVec.z);
                 isOpening = false;

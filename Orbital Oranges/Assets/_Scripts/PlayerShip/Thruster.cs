@@ -38,9 +38,12 @@ public class Thruster : MonoBehaviour, IConnectable
         {
             CurrentStrength = Mathf.MoveTowards(CurrentStrength, 0, _settings.Deceleration * Time.fixedDeltaTime);
         }
-        // update particle system
-        var main = _particleSystem.main;
-        main.startSpeed = CurrentStrength * (_settings.ParticleSpeedRange.y - _settings.ParticleSpeedRange.x) + _settings.ParticleSpeedRange.x;
+        if (_particleSystem != null)
+        {
+            // update particle system
+            var main = _particleSystem.main;
+            main.startSpeed = CurrentStrength * (_settings.ParticleSpeedRange.y - _settings.ParticleSpeedRange.x) + _settings.ParticleSpeedRange.x;
+        }
     }
 
     public void SetTargetStrength(float targetStrength)
@@ -51,7 +54,8 @@ public class Thruster : MonoBehaviour, IConnectable
     public void Connect(Dir dir, int slot, IConnector connector)
     {
         IsConnected = true;
-        _connectionCollider.enabled = false;
+        if (_connectionCollider != null)
+            _connectionCollider.enabled = false;
         _connector = connector;
         _dir = dir;
         _slot = slot;
