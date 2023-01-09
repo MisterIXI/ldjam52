@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 429637413411354731}
   - component: {fileID: 6034788774072322280}
+  - component: {fileID: 8709307906829517359}
+  - component: {fileID: 51732617620778215}
   m_Layer: 0
   m_Name: MediumThruster
   m_TagString: Connectable
@@ -49,6 +51,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settings: {fileID: 11400000, guid: 4ae20a01e140f1b4f824f2794f936f5d, type: 2}
   _particleSystem: {fileID: 8489440113493295544}
+--- !u!54 &8709307906829517359
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325586535198453308}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &51732617620778215
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325586535198453308}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.59
+  m_Height: 1.93
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.74, z: 0}
 --- !u!1 &4070391677989024504
 GameObject:
   m_ObjectHideFlags: 0

@@ -69,5 +69,7 @@ public class Thruster : MonoBehaviour, IConnectable
         _dir = Dir.Default;
         _slot = -1;
         _connectionCollider.enabled = true;
+        Rigidbody rb = gameObject.AddComponent<Rigidbody>(); 
+        rb.useGravity = false;
     }
 }

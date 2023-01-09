@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3773516134019840091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6600549951078148161}
+  m_Layer: 0
+  m_Name: BeamTip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6600549951078148161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3773516134019840091}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1224026207224166128}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3976382823877431694
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,6 +86,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1224026207224166128}
   - component: {fileID: 4433920327376172523}
+  - component: {fileID: 8184170556402014620}
+  - component: {fileID: 7793478607199157767}
   m_Layer: 0
   m_Name: CollectorBeam
   m_TagString: Connectable
@@ -76,6 +109,7 @@ Transform:
   m_Children:
   - {fileID: 8342541020824412836}
   - {fileID: 6223746825440092479}
+  - {fileID: 6600549951078148161}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -93,6 +127,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _connectedMat: {fileID: 2100000, guid: d82dc71f1b0f30e43a363036c99ad3ff, type: 2}
   _disconnectedMat: {fileID: 2100000, guid: 74472fa27918dc241b53e08bf7406d13, type: 2}
+  _tipTransform: {fileID: 6600549951078148161}
+--- !u!54 &8184170556402014620
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6004603895190244641}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &7793478607199157767
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6004603895190244641}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.52
+  m_Height: 1.99
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!1001 &8380092415198905679
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,6 +7,15 @@ public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] float interactionDistance;
     private TextMeshProUGUI interactText;
+    public TractorbeamScript currentTractorBeam;
+    public GameObject TractorBeamPrefab;
+    private void Awake() {
+        if(RefManager.playerInteraction != null) {
+            Destroy(gameObject);
+            return;
+        }
+        RefManager.playerInteraction = this;
+    }
     private void Start()
     {
         InputManager inputManager = RefManager.inputManager;
@@ -17,15 +26,18 @@ public class PlayerInteraction : MonoBehaviour
     private void Update()
     {
         RaycastHit hit;
-        int layers = 1 << 3;
-        layers = ~layers;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, layers))
+        // int layers = 1 << 3;
+        // layers = ~layers;
+        Debug.DrawRay(transform.position, transform.forward * interactionDistance, Color.red);
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance))
         {
             if (hit.collider.GetComponent<IInteractable>() != null)
             {
                 IInteractable interactableObject = hit.collider.GetComponent<IInteractable>();
                 interactText.text = interactableObject.GetInteractText();
             }
+            Debug.Log("Ray hit: " + hit.collider.name);
         }
         else
         {
@@ -36,11 +48,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (context.performed)
         {
-            int layers = 1 << 3;
-            layers = ~layers;
-            Debug.DrawRay(transform.position, transform.forward * interactionDistance, Color.red);
+            // int layers = 1 << 3;
+            // layers = ~layers;
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, layers))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance))
             {
 
                 if (hit.collider.GetComponent<IInteractable>() != null)

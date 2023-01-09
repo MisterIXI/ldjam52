@@ -40,7 +40,8 @@ public class SoundManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        RefManager.gameManager.OnGameStateChange -= OnGameStateChange;
+        if (RefManager.gameManager != null)
+            RefManager.gameManager.OnGameStateChange -= OnGameStateChange;
     }
     public void OnGameStateChange(GameManager.state newState)
     {

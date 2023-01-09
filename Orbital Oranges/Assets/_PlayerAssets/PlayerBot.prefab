@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 5690143935529539527}
   - component: {fileID: 4934281564075518336}
   - component: {fileID: 3615842292052335446}
+  - component: {fileID: 2144962498001130415}
   m_Layer: 0
   m_Name: PlayerBot
   m_TagString: Player
@@ -250,6 +251,7 @@ MonoBehaviour:
   _thrusterPrefab: {fileID: 8459572725437510628, guid: 99653b37168691049a93464acea055b3,
     type: 3}
   _playerSeat: {fileID: 0}
+  _playerBot: {fileID: 0}
   showGizmos: 0
 --- !u!114 &5690143935529539527
 MonoBehaviour:
@@ -304,6 +306,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.46
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2144962498001130415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716410681954007039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37795b62c2658dc48b074ba830bc0194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 5
+  currentTractorBeam: {fileID: 0}
 --- !u!1 &4357619468356384667
 GameObject:
   m_ObjectHideFlags: 0
