@@ -9,9 +9,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip mainBG;
     [SerializeField] private AudioClip finalBG;
     [SerializeField] private AudioClip menuBG;
+    [SerializeField] private AudioClip hoverSFX;
+    [SerializeField] private AudioClip clickSFX;
     private bool _finalStageTriggered = false;
     private float _startTime;
     private bool _gameRunning;
+
+    public float volumeScale = 1;
     private void Awake()
     {
         if (RefManager.soundManager != null)
@@ -86,10 +90,17 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(string name, float volumeScale)
     {
-        GameObject soundGameObject = new GameObject("Sound");
+       // GameObject soundGameObject = new GameObject("Sound");
         audioSource.PlayOneShot(getSound(name), volumeScale);
     }
-
+    public void playhoverSFX()
+    {
+        audioSource.PlayOneShot(hoverSFX, volumeScale);
+    }
+    public void playclickSFX()
+    {
+        audioSource.PlayOneShot(clickSFX, volumeScale);
+    }
     private AudioClip getSound(string _name)
     {
         AudioClip _myAudioClip = clips[0];

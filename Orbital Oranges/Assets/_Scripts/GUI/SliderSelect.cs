@@ -26,6 +26,7 @@ public class SliderSelect : MonoBehaviour, IPointerEnterHandler, ISelectHandler,
     public void OnSelect(BaseEventData eventData)
     {
         SliderSelector.SetActive(true);
+        RefManager.soundManager.playhoverSFX();
     }
 
     public void OnDeselect(BaseEventData eventData)
