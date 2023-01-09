@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private AudioClip[] clips = new AudioClip[10];
@@ -12,7 +12,8 @@ public class SoundManager : MonoBehaviour
     private bool _finalStageTriggered = false;
     private float _startTime;
     private bool _gameRunning;
-    private void Awake() {
+    private void Awake()
+    {
         if (RefManager.soundManager != null)
         {
             Destroy(gameObject);
@@ -27,6 +28,15 @@ public class SoundManager : MonoBehaviour
         audioSource.loop = false;
         RefManager.gameManager.OnGameStateChange += OnGameStateChange;
         Debug.Log("SoundManager: Start");
+    }
+    public void PauseMusic()
+    {
+        audioSource.Pause();
+    }
+
+    public void UnPauseMusic()
+    {
+        audioSource.Play();
     }
     private void OnDestroy()
     {

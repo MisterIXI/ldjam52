@@ -217,10 +217,12 @@ public class MenuManager : MonoBehaviour
             if (isPaused)
             {
                 ResumeGame();
+                RefManager.soundManager.UnPauseMusic();
             }
             else
             {
                 OpenPauseMenu();
+                RefManager.soundManager.PauseMusic();
             }
         }
     }
