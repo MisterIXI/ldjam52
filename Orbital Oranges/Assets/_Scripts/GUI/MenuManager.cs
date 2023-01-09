@@ -128,8 +128,8 @@ public class MenuManager : MonoBehaviour
     {
         if (gameRunning)
         {
-            float time = Time.time - StartTime;
-            string formattedTime = string.Format("{0:00}:{1:00}", time / 60, time % 60);
+            float time = GameManager.GAME_DURATION - (Time.time - StartTime);
+            string formattedTime = string.Format("{0:00}:{1:00}", (int)time / 60, time % 60);
             TextTime.text = formattedTime;
         }
         else
@@ -140,14 +140,17 @@ public class MenuManager : MonoBehaviour
 
     private void OnGameStateChange(GameManager.state newState)
     {
-        if (newState == GameManager.state.running)
+        switch(newState)
         {
-            StartTime = Time.time;
-            gameRunning = true;
-        }
-        else
-        {
-            gameRunning = false;
+            case GameManager.state.running:
+                StartTime = Time.time;
+                gameRunning = true;
+                break;
+            case GameManager.state.Critical:
+                break;
+            default:
+                gameRunning = false;
+                break;
         }
     }
     void StartGame()
@@ -217,12 +220,10 @@ public class MenuManager : MonoBehaviour
             if (isPaused)
             {
                 ResumeGame();
-                RefManager.soundManager.UnPauseMusic();
             }
             else
             {
                 OpenPauseMenu();
-                RefManager.soundManager.PauseMusic();
             }
         }
     }
@@ -236,7 +237,7 @@ public class MenuManager : MonoBehaviour
 
         isPaused = true;
         Time.timeScale = 0;
-
+        RefManager.soundManager.PauseMusic();
         ButtonResume.Select();
     }
 
@@ -245,7 +246,7 @@ public class MenuManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1;
         HideAllContainers();
-
+        RefManager.soundManager.UnPauseMusic();
         ContainerHUD.SetActive(true);
     }
     void OpenEndMenu() // YANNIK Wenn du OpenEndMenu(); Machst kannst du End Screen ausführen.

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public const int GAME_CRITICAL_STAGE = 459;
     public Action<state> OnGameStateChange = delegate { };
     public float _clockTime { get; private set; }
+    private state _currentState = state.Menu;
     public enum state
     {
         None,
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
         // _operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
         // _operation.allowSceneActivation = false;
 
+        OnGameStateChange += OnStateChange;
         SceneManager.sceneLoaded += OnSceneLoaded;
         _currentScene = SceneManager.GetActiveScene();
         _clockTime = -1f;
@@ -77,7 +79,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Time.time - _clockTime >= GAME_DURATION)
+        if (_currentState != state.Critical &&Time.time - _clockTime >= GAME_CRITICAL_STAGE)
+        {
+            OnGameStateChange(state.Critical);
+        }
+        if (_currentState == state.Critical &&Time.time - _clockTime >= GAME_DURATION)
         {
             GameEnd();
         }
@@ -93,5 +99,10 @@ public class GameManager : MonoBehaviour
     {
         RefManager.menuManager.gameRunning = false;
         OnGameStateChange(state.None);
+    }
+
+    private void OnStateChange(state newState)
+    {
+        _currentState = newState;
     }
 }
