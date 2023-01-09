@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 3615842292052335446}
   m_Layer: 0
   m_Name: PlayerBot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -249,6 +249,7 @@ MonoBehaviour:
   _isPlayer: 1
   _thrusterPrefab: {fileID: 8459572725437510628, guid: 99653b37168691049a93464acea055b3,
     type: 3}
+  _playerSeat: {fileID: 0}
   showGizmos: 0
 --- !u!114 &5690143935529539527
 MonoBehaviour:
