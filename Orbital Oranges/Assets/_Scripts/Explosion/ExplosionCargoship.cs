@@ -14,7 +14,7 @@ public class ExplosionCargoship : MonoBehaviour
     private float stage2Emmission = 0.05f;
     private float endEmmission = 1f;
 
-    private float stage1Time = 459f;
+    private float stage1Time = GameManager.GAME_CRITICAL_STAGE;
     private float explosionTime = 0.1f;
 
     private float _startTime;
@@ -40,16 +40,16 @@ public class ExplosionCargoship : MonoBehaviour
     {
         RefManager.gameManager.OnGameStateChange -= OnGameStateChange;
     }
-    public void OnGameStateChange(bool newState)
+    public void OnGameStateChange(GameManager.state newState)
     {
-        if (newState)
+        if (newState == GameManager.state.running)
         {
             _startTime = Time.time;
             _gameRunning = true;
             _matsSet = false;
             _exploded = false;
         }
-        else
+        else if (newState != GameManager.state.running && newState != GameManager.state.Critical)
         {
             _gameRunning = false;
         }

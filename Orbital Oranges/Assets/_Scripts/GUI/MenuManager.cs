@@ -138,9 +138,9 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    private void OnGameStateChange(bool state)
+    private void OnGameStateChange(GameManager.state newState)
     {
-        if (state)
+        if (newState == GameManager.state.running)
         {
             StartTime = Time.time;
             gameRunning = true;
