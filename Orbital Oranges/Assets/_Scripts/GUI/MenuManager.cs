@@ -238,6 +238,7 @@ public class MenuManager : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0;
         RefManager.soundManager.PauseMusic();
+        Cursor.lockState = CursorLockMode.None;
         ButtonResume.Select();
     }
 
@@ -247,6 +248,8 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1;
         HideAllContainers();
         RefManager.soundManager.UnPauseMusic();
+        
+        Cursor.lockState = CursorLockMode.Locked;
         ContainerHUD.SetActive(true);
     }
     void OpenEndMenu() // YANNIK Wenn du OpenEndMenu(); Machst kannst du End Screen ausführen.

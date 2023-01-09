@@ -60,10 +60,12 @@ public class GameManager : MonoBehaviour
             _operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
             _operation.allowSceneActivation = false;
             OnGameStateChange(state.Menu);
+            Cursor.lockState = CursorLockMode.None;
         }
         if (scene.buildIndex == 1)
         {
             GameStart();
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
