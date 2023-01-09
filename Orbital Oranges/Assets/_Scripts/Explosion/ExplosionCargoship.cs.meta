@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d11a5e0c7e87f7c43937fc2901e95152
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ExplosionYellowMat: {fileID: 2100000, guid: 6a729364187c9254ba876012101fc8cb,
+      type: 2}
+  - ExplosionRedwMat: {fileID: 2100000, guid: 01d306ca21f4f4a4880f4235660b7301, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
