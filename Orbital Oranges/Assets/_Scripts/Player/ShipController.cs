@@ -107,7 +107,8 @@ public class ShipController : MonoBehaviour, IConnector, IInteractable
         // angle_x = Mathf.Clamp(angle_x + _lookInput.y * _playerSettings.cameraSensitivity, -89, 89);
         angle_y = Mathf.MoveTowardsAngle(angle_y, angle_y + _lookInput.x * _playerSettings.cameraSensitivity, _playerSettings.cameraSensitivity);
         Quaternion newRotation = Quaternion.Euler(angle_x, angle_y, 0);
-        _rigidbody.MoveRotation(newRotation);
+        if (Time.time != 0)
+            _rigidbody.MoveRotation(newRotation);
         //Debug.Log("new euler x: " + transform.rotation.eulerAngles.x);
 
         if (_isPlayer && !_isControlled)
