@@ -130,6 +130,20 @@ CapsuleCollider:
   m_Height: 3.8665714
   m_Direction: 1
   m_Center: {x: -0.07811607, y: 1.957695, z: -0.019712688}
+--- !u!114 &-8206321622247563985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8398106519716001192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04b86eccd505e042a414670249f14d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFruit: 1
+  ConnectedBeam: {fileID: 0}
 --- !u!114 &-1111002250685867802
 MonoBehaviour:
   m_ObjectHideFlags: 0
