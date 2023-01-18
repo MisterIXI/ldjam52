@@ -54,7 +54,7 @@ public class TractorbeamScript : MonoBehaviour
             transform.position = targetTransform.position;
             // Drawing a line between them.
             _lineRenderer.SetPosition(0, targetTransform.position);
-            _lineRenderer.SetPosition(1, new Vector3 (itemRigidbody.transform.position.x, itemRigidbody.transform.position.y + 1, itemRigidbody.transform.position.z));
+            _lineRenderer.SetPosition(1, itemRigidbody.transform.position);
         }
     }
 }
